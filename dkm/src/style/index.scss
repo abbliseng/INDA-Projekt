@@ -1,6 +1,13 @@
 @import "events.scss";
+<<<<<<< HEAD
 @import "layout.scss";
 
 *{
     background-color: black;
+=======
+@import "primary.scss";
+
+body {
+  background-color: $primary;
+>>>>>>> ffe950c30b3b5b01e2b7ac06b8676d12e3fe2416
 }
