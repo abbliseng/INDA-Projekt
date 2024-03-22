@@ -3,7 +3,9 @@
 const Events = ()=>{
 
     return (
-        <h1>I'm cool</h1>
+        <div class="container">
+            <h1>Events</h1>
+        </div>
     )
 }
 
