@@ -1,2 +1,4 @@
 .env
 database.sh
+mnt/
+node_modules/
