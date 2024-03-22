@@ -8,5 +8,6 @@ Fix da DMK hemsida
 - Start the database by runnning `database.sh`
 - You may need to add sudo permissions etc to the `.sh` file
 
+https://www.canva.com/design/DAGAOIe0X-w/Dq1IdkRHaqR6XdAoQafNTw/edit?utm_content=DAGAOIe0X-w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
 
 DKM go brrrrrrrrrrrrrrrrrrrrrrrrrrr
