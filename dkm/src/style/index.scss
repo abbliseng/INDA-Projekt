@@ -1,1 +1,6 @@
 @import "events.scss";
+@import "primary.scss";
+
+body {
+  background-color: $primary;
+}
