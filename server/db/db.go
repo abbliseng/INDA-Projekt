@@ -11,8 +11,6 @@ import (
 var db *gorm.DB
 
 func InitDB() {
-	// Carl's: "postgres://postgres:facebook@localhost:5432/postgres"
-	// dsn := "postgres://postgres:facebook@localhost:5432/postgres"
 	dsn := os.Getenv("POSTGRES_CONNECTION")
 
 	var err error
@@ -21,10 +19,7 @@ func InitDB() {
 		os.Exit(5)
 	}
 
-	// db.AutoMigrate(&SCHEDULE{})
-	// db.AutoMigrate(&CHECKLIST{})
-
-	db.AutoMigrate(&CHECKLIST{}, &SCHEDULE{})
+	// db.AutoMigrate(&CHECKLIST{}, &SCHEDULE{})
 
 }
 

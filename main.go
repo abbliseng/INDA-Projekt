@@ -8,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/joho/godotenv"
 
-	database "github.com/datasektionen/facebook/server/db"
+	database "github.com/abbliseng/INDA-Projekt/server/db"
 
-	server "github.com/datasektionen/facebook/server"
+	server "github.com/abbliseng/INDA-Projekt/server"
 )
 
 func main() {
@@ -29,9 +29,6 @@ func main() {
 
 	api := r.Group("/api")
 	server.InitRoutes(api)
-
-	websocket := r.Group("/websocket")
-	server.InitWebsocket(websocket)
 
 	r.Run(fmt.Sprintf(":%d", 5001))
 }
