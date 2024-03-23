@@ -1,6 +1,10 @@
 @import "events.scss";
 @import "primary.scss";
 
+* {
+  font-family: 'Roboto', sans-serif;
+}
+
 body {
   background-color: $primary;
 }
