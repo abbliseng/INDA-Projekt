@@ -1,7 +1,25 @@
 h1{
-    color: black;
+    color: white;
+}
+
+.capsule {
+    width: 100%;
+    display: flex;
+    // justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .carousel_section {
+        width: 80%;
+        min-width: 1000px;
+        aspect-ratio: 16/9;
+    }
 }
 
 .container {
-    background-color: white;
+    // background-color: white;
+    width: 80%;
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
 }
