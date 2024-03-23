@@ -19,16 +19,20 @@
         background-color: $secondary;
         color: $primary;
         border-radius: 0 0 5px 5px;
-        padding: 5px;
         height: 10%;
-        min-height: 50px;
+        min-height: 60px;
+        max-height: 150px;
+
+        display: flex;
+        align-items: center;
+        flex-direction: column;
 
         .h1 {
             color: $primary;
         }
         transition: height 0.4s ease-out 100ms;
         &:hover {
-            height: 80%;
+            height: min(80%, 150px);
         }
 
     }
