@@ -1,0 +1,47 @@
+.header{
+    min-height: 10vh;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 100%;
+    margin: 0% 3%;
+    .logo{
+        grid-column: 1/2;
+        grid-row: 1/2;
+        img{
+            max-height: 10vh;
+        }
+    }
+    .menu{
+        grid-column: 2/3;
+        grid-row: 1/2;
+        ul{
+            width: 100%;
+            height: 100%;
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            li{
+                padding: 3vh 3vw;
+                text-decoration: none;
+                color: $secondary;
+                transition: all ease .5s;
+                &:hover{
+                    color: $tertiary;
+                }
+            }
+            div{
+                z-index: 1;
+                width: 1px;
+                height: 50%;
+                opacity: 0.5;
+                background-color: $secondary;
+            }
+        }
+    }
+}
+
+.footer{
+    min-height: 5vh;
+    background-color: coral;
+}
