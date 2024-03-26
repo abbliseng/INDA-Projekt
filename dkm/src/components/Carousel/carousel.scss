@@ -1,0 +1,80 @@
+@import '../../style/primary.scss';
+
+.carousel {
+    // outline: 1px solid red;
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    position: relative;
+
+    .overlay {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+        .section {
+            flex-grow: 1;
+            // outline: 1px solid yellow;
+        }
+
+    }
+
+    .inner {
+        color: white;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+        height: 100%;
+
+        // outline: 1px solid red;
+        border-radius: 15px;
+
+        .card {
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            width : 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: end;
+
+            .content {
+                background-color: $secondary;
+                color: $primary;
+                border-radius: 0 0 5px 5px;
+                padding: 5px;
+
+                .h1 {
+                    color: $primary;
+                }
+            }
+        }
+    }
+
+    .dots {
+        min-height: 10px;
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        width: 100%;
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: $secondary_dark;
+            margin: 5px;
+
+            &.active {
+                background-color: $secondary;
+            }
+        }
+    }
+}
