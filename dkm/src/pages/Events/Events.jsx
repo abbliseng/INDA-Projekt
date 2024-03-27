@@ -18,9 +18,9 @@ const Events = ()=>{
         },
         {
           id: 1,
-          title: "Blums 2024",
+          title: "Beerpong pub",
           text: "This is the first slide",
-          picture: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/421859723_754461693378995_1926863918740628798_n.jpg?stp=dst-jpg_p960x960&_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yUwLSn0VSsIAX-L52gq&_nc_ht=scontent-arn2-1.xx&oh=00_AfBOaTdf_dwwMeGFyxvpZSezjOEioHVTCkNCzH7T2VLPCA&oe=6603921E"
+          picture: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/431562608_789062959918868_5112187908495052763_n.jpg?stp=dst-jpg_p960x960&_nc_cat=102&ccb=1-7&_nc_sid=5f2048&_nc_ohc=mOorzEuXc1gAX-mo28R&_nc_oc=AdiDomKZ5STIPYcRJeZAdhHYzr5BJHHprrY5pNkpZ6APjAtTKVIMDHk4YPKjvRFvFOE&_nc_ht=scontent-arn2-1.xx&oh=00_AfCo4DNAKPxuzcTEe1uINSyG6Uynv2GsyHIHSCk7c3KHrQ&oe=66087970"
         }
       ]);
 
