@@ -2,16 +2,25 @@ import React, { useState } from "react";
 import "./card.scss";
 
 const Card = ({ title, description, picture = "https://via.placeholder.com/150", fullsize = false}) => {
-  return (
+    const [hover, setHover] = useState(false);
+
+return (
     <div class="card"
         style={{
             backgroundImage: `url(${picture})`,
             maxHeight: fullsize ? "100%" : "300px"
         }}
     >
-        <div class="content">
+        <div class="content"
+            onMouseEnter={(e)=>{
+                setHover(true);
+            }}
+            onMouseLeave={(e)=>{
+                setHover(false);
+            }}
+        >
             <h2>{title}</h2>
-            <p>{description}</p>
+            <p class="desc">{description}</p>
         </div>
     </div>
   );
