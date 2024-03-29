@@ -19,4 +19,5 @@ Gotta use the issue tracker. "For every feature you want to create (or bug to fi
 ### PRs
 ## Project Description
 (Include short part about how feasible your project is and how it can be divided into weeks)
+### MVP Requirements
 ## Who does what?
