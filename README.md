@@ -15,8 +15,14 @@ DKM go brrrrrrrrrrrrrrrrrrrrrrrrrrr
 ## Links
 ## Naming conventions
 ### Issues and Commits
-Gotta use the issue tracker. "For every feature you want to create (or bug to fix), there should be an associated issue"
+* [Feature]: Used when implementing a new feature. A short description and example usecase should preferably be included.
+* [Quickfix]: A simpler fix for a issue that hasn't had time to become a github issue yet.
+* [Refactor]: Reworking an old feature or infrastucture.
+* [Fix #[number]]: A fix associated with a github issue.
+
+*[Project-week-0](https://github.com/IndaPlus23/RaySorcerers-Instructions/tree/master/project-week-0): Gotta use the issue tracker. "For every feature you want to create (or bug to fix), there should be an associated issue"*
 ### PRs
+When merging a branch the main feature or purpose should stand as the PR title. The PR description should include a list of all changes.
 ## Project Description
 (Include short part about how feasible your project is and how it can be divided into weeks)
 ### MVP Requirements
