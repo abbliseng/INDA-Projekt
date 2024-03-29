@@ -16,6 +16,7 @@ DKM go brrrrrrrrrrrrrrrrrrrrrrrrrrr
 * [Trello](https://trello.com/b/GDtDiiEx/inda-projekt)
 * [Canva](https://www.canva.com/design/DAGAOIe0X-w/Dq1IdkRHaqR6XdAoQafNTw/edit?utm_content=DAGAOIe0X-w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 ## Naming conventions
+Each commit should preferabbly have a connected issue to help us keep track. Feature branches can also be used as an alternative.
 ### Issues and Commits
 * [Feature]: Used when implementing a new feature. A short description and example usecase should preferably be included.
 * [Quickfix]: A simpler fix for a issue that hasn't had time to become a github issue yet.
