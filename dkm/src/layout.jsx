@@ -42,7 +42,39 @@ const Footer = ()=>{
     return(
         <>
             <div className="footer">
-                <h1>Footer</h1>
+                <div className="logo">
+                    <img src="/logo.png" alt="DKM logo" />
+                    <span>Datasektionens Klubbmästeri</span>
+                </div>
+                <div className="links">
+                    <ul>
+                        <li>
+                            <a>Instagram</a>
+                        </li>
+                        <li>
+                            <a>Facebook</a>
+                        </li>
+                        <li>
+                            <a>Sök</a>
+                        </li>
+                    </ul>
+                </div>
+                <div className="contacts">
+                    <ul>
+                        <li>
+                            <span>hejsan@dkm.datasektionen.se</span>
+                        </li>
+                        <li>
+                            <span>svejsan@dkm.datasektionen.se</span>
+                        </li>
+                        <li>
+                            <span>hejsvej@dkm.datasektionen.se</span>
+                        </li>
+                        <li>
+                            <span>sansan@dkm.datasektionen.se</span>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </>
     )
