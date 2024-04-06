@@ -30,4 +30,7 @@ When merging a branch the main feature or purpose should stand as the PR title n
 ## Project Description
 (Include short part about how feasible your project is and how it can be divided into weeks)
 ### MVP Requirements
+See Canva project above. The parts of the map colored cerise is the MVP of this project. 
+
+
 ## Who does what?
