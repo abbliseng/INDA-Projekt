@@ -75,5 +75,5 @@ const puppeteer = require("puppeteer");
 
   // Save data to file
   const fs = require("fs");
-  fs.writeFileSync("data.json", JSON.stringify(data));
+  fs.writeFileSync("data1.json", JSON.stringify(data));
 })();

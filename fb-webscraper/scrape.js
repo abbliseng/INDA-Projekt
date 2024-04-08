@@ -2,7 +2,7 @@ const puppeteer = require("puppeteer");
 
 async function ScrapeEvents() {
     const browser = await puppeteer.launch({
-        headless: true,
+        headless: false,
     });
     const page = await browser.newPage();
     await page.goto('https://www.facebook.com/datasklubbmasteri/upcoming_hosted_events');

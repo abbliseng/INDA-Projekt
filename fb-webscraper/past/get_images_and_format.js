@@ -1,6 +1,6 @@
 const puppeteer = require("puppeteer");
 
-const data = require("./data.json");
+const data = require("./data1.json");
 
 // console.log(data);
 (async () => {
@@ -18,6 +18,7 @@ const data = require("./data.json");
         if (event.img_url) {
             continue;
         }
+        console.log("Going to", event.event_link);
         await page.goto(event.event_link);
 
         // If the following selectors are not found, continue to next iteration
@@ -53,18 +54,31 @@ const data = require("./data.json");
             return img_srcs[1];
         });
 
-        // console.log(img_url);
-        // page.goto(img_url);
+        // "https://www.facebook.com/events/816900945011728/"
+        // Get the number part
+        const event_url = event.event_link;
+        const event_id = event_url.split("/")[4];
+
+        if (!img_url) {
+            console.log("Could not find img for event", i + 1, "of", data.length);
+            continue;
+        }
+
+        // Save the image to the local filesystem ./images
+        await page.goto(img_url);
+        await delay(1000);
+        await page.screenshot({ path: `./images/${event_id}.png` });
 
         // Create new data object with img_url
         const new_event = {
             ...event,
+            id: event_id,
             img_url,
         };
         // Update the data file
         data[i] = new_event;
         const fs = require("fs");
-        fs.writeFileSync("./data.json", JSON.stringify(data));
+        fs.writeFileSync("./data2.json", JSON.stringify(data));
     }
 })();
 
