@@ -34,3 +34,4 @@ See Canva project above. The parts of the map colored cerise is the MVP of this 
 
 
 ## Who does what?
+We have chosen to divide the project between us using trello. Since we are only two developers we don't see a need to decide all aspects of dividing the work right from the start. Instead all tasks are written in trello and we just asign ourselves to whatever we are currently working on or planning.
