@@ -49,10 +49,6 @@ const Footer = ()=>{
 }
 
 const Layout = ({ children }) => {
-
-
-
-
     return (
         <>
             <Header />

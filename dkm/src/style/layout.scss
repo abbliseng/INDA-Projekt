@@ -1,3 +1,8 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+
 .header{
     min-height: 10vh;
     display: grid;

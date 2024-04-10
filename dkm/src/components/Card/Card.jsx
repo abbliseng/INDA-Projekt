@@ -11,7 +11,11 @@ return (
             maxHeight: fullsize ? "100%" : "300px"
         }}
         onClick={() => {
-            window.open("https://www.facebook.com/events/" + id);
+            if (id != 1) {
+                window.open("https://www.facebook.com/events/" + id);
+            } else {
+                window.open("http://localhost:3000/stella");
+            }
         }}
     >
         <div class="content"
