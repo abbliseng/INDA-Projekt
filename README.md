@@ -29,6 +29,8 @@ When merging a branch the main feature or purpose should stand as the PR title n
 * [Fix #[number]]: A fix associated with a github issue.
 ## Project Description
 (Include short part about how feasible your project is and how it can be divided into weeks)
+This project aims to create a [new website](dkm.io) for the student club [DKM](https://www.datasektionen.se/en/clubs/dkm).  
+The project should include a new landing page, event page and about page. We also want to set up a reliable back-end for the webpage to handle storing and fetching events. Hopefully we also have time to reach some of our streatch goals like including the drinks menu.
 ### MVP Requirements
 See Canva project above. The parts of the map colored cerise is the MVP of this project. 
 
