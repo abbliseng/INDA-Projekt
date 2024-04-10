@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./card.scss";
 
-const Card = ({ title, description, picture = "https://via.placeholder.com/150", fullsize = false}) => {
+const Card = ({ title, description, picture = "https://via.placeholder.com/150", fullsize = false, id}) => {
     const [hover, setHover] = useState(false);
 
 return (
@@ -9,6 +9,9 @@ return (
         style={{
             backgroundImage: `url(${picture})`,
             maxHeight: fullsize ? "100%" : "300px"
+        }}
+        onClick={() => {
+            window.open("https://www.facebook.com/events/" + id);
         }}
     >
         <div class="content"
