@@ -146,7 +146,7 @@ const fetchImage = (event) => {
                             <Event
                             event={{
                                 name: event[0].event_name,
-                                description: event[0].event_date.year + "/" + event[0].event_date.month + "/" + event[0].event_date.day,
+                                description: event[0].event_date.toDateString(),
                                 image: fetchImage(event) || backupImageUrl,
                                 id: event[0].id,
                             }}
