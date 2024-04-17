@@ -49,13 +49,10 @@ const Footer = ()=>{
                 <div className="links">
                     <ul>
                         <li>
-                            <a>Instagram</a>
+                            <img className="instagram" src="/instagram-logo.png" alt="Instagram logo" />
                         </li>
                         <li>
-                            <a>Facebook</a>
-                        </li>
-                        <li>
-                            <a>Sök</a>
+                            <img className="facebook" src="/facebook-logo.png" alt="Facebook logo" />
                         </li>
                     </ul>
                 </div>
