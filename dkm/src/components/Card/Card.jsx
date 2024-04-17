@@ -5,10 +5,9 @@ const Card = ({ title, description, picture = "https://via.placeholder.com/150",
     const [hover, setHover] = useState(false);
 
 return (
-    <div class="card"
+    <div class={`card ${fullsize ? "fullsize" : ""}`}
         style={{
             backgroundImage: `url(${picture})`,
-            width: fullsize ? "100%" : "20vw",
         }}
         onClick={() => {
             if (id != 1) {
