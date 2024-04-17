@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
+import Loader from "../../components/Loader/Loader";
 
 const Event = ({ event }) => {
   return (
@@ -14,6 +15,10 @@ const Event = ({ event }) => {
     />
   );
 };
+
+const Divider = () => {
+    return <div class="division_bar"></div>;
+}
 
 const Events = () => {
   const backupImageUrl = "/logo.png";
@@ -36,14 +41,15 @@ const Events = () => {
 
 //   
 const url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events"
-
 const [yearsToExpand, setYearsToExpand] = useState([
     new Date().getFullYear().toString(),
 ]);
-
 const [pastEvents, setPastEvents] = useState([]);
+const [loadingPastEvents, setLoadingPastEvents] = useState(true);
+
 // Fetch with GET
 useEffect(() => {
+    setLoadingPastEvents(true);
     fetch(url, {
         method: "GET",
         headers: {
@@ -73,15 +79,10 @@ useEffect(() => {
             console.log(years);
 
             setPastEvents(years);
+            setLoadingPastEvents(false);
         })
         .catch((err) => console.log(err));
 }, []);
-
-// useEffect(() => {
-//     const years = Object.keys(pastEvents);
-//     setYearsToExpand(years);
-//     console.log(yearsToExpand);
-// }, [pastEvents]);
 
 const toggleShowHide = (year) => {
     if (yearsToExpand.includes(year)) {
@@ -120,13 +121,15 @@ const fetchImage = (event) => {
         }
       <h1>Past Events</h1>
       <div class="container">
-        {/* Loop over the years in reverse order */}
-
-        {Object.keys(pastEvents).reverse().map((year) => {
+        {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
             return (
                 <>
+                {/* <Divider /> */}
                 <h1
                     onClick={() => toggleShowHide(year)}
+                    style={{
+                        fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
+                    }}
                 >{year}</h1>
                 {
                     yearsToExpand.includes(year) &&
@@ -145,7 +148,7 @@ const fetchImage = (event) => {
                 }
                 </>
             );
-        })}
+        }) : <div className="loader"><Loader /></div>}
       </div>
     </div>
   );
