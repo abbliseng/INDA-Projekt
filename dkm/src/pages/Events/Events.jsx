@@ -130,7 +130,7 @@ const fetchImage = (event) => {
                     style={{
                         fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
                     }}
-                >{year}</h1>
+                >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
                 {
                     yearsToExpand.includes(year) &&
                     pastEvents[year].map((event) => {
