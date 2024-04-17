@@ -61,22 +61,26 @@ useEffect(() => {
         .then((data) => {
             // Parse date
             data.forEach((event) => {
-                // Format year-month-day
-                event[0].event_date = new Date(event[0].event_date).toLocaleDateString();
+                event[0].event_date = new Date(event[0].event_date);
             });
             // Sort by date
-            data.sort((a, b) => new Date(b[0].event_date) - new Date(a[0].event_date));
+            data.sort((a, b) => {
+                return a[0].event_date - b[0].event_date;
+            });
 
             // Group by year
             let years = {};
             data.forEach((event) => {
-                let year = event[0].event_date.split("-")[0];
+                const year = event[0].event_date.getFullYear();
+                if (isNaN(year)) {
+                    return;
+                }
+
                 if (!years[year]) {
                     years[year] = [];
                 }
                 years[year].push(event);
             });
-            console.log(years);
 
             setPastEvents(years);
             setLoadingPastEvents(false);
@@ -122,6 +126,10 @@ const fetchImage = (event) => {
       <h1>Past Events</h1>
       <div class="container">
         {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
+            if (year === "Whoops") {
+                // return <h1>Whoops, something went wrong</h1>;
+                return <></>;
+            }
             return (
                 <>
                 {/* <Divider /> */}
@@ -138,7 +146,7 @@ const fetchImage = (event) => {
                             <Event
                             event={{
                                 name: event[0].event_name,
-                                description: event[0].event_date,
+                                description: event[0].event_date.year + "/" + event[0].event_date.month + "/" + event[0].event_date.day,
                                 image: fetchImage(event) || backupImageUrl,
                                 id: event[0].id,
                             }}
