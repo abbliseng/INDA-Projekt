@@ -3,81 +3,152 @@ import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
 
 const Event = ({ event }) => {
-    return (
-        <Card
-            // when pressed redirect to facebook event with event.id
-            // link={"https://www.facebook.com/events/" + event.id}
-            title={event.name}
-            description={event.description}
-            picture={event.image}
-            id={event.id}
-        />
-    );
+  return (
+    <Card
+      // when pressed redirect to facebook event with event.id
+      // link={"https://www.facebook.com/events/" + event.id}
+      title={event.name}
+      description={event.description}
+      picture={event.image}
+      id={event.id}
+    />
+  );
 };
 
 const Events = () => {
-    const backupImageUrl = "./logo.png";
-    const [upcomingEvents, setUpcomingEvents] = useState([
-        {
-            id: 2,
-            title: "PPP",
-            text: "Det är VÅR och det har äntligen blivit dags för årets upplaga av PPP! DKM och CLW slår ihop sig och skapar en magisk kväll som du inte vill missa!",
-            picture:
-                "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/431487589_912232430907635_9194427698980121245_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=cKpnAPkiH8QAX-AVDDD&_nc_ht=scontent-arn2-1.xx&oh=00_AfBnV1gvDAc_VF3Q7quo_IdeDttFaIuOtqsALZg97iZDHg&oe=6604F48D",
-        },
-        {
-            id: 1,
-            title: "Beerpong pub",
-            text: "This is the first slide",
-            picture: "./logo.png",
-        },
-    ]);
-    //   Load past events from ./past_events.json
-    const [pastEvents, setPastEvents] = useState([]);
-    useEffect(() => {
-        fetch("./past_events.json")
-            .then((response) => response.json())
-            .then((data) => setPastEvents(data))
-            .catch((err) => console.log(err));
-    }, []);
+  const backupImageUrl = "/logo.png";
+  const [upcomingEvents, setUpcomingEvents] = useState([
+    // {
+    //   id: 2,
+    //   title: "PPP",
+    //   text: "Det är VÅR och det har äntligen blivit dags för årets upplaga av PPP! DKM och CLW slår ihop sig och skapar en magisk kväll som du inte vill missa!",
+    //   picture:
+    //     "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/431487589_912232430907635_9194427698980121245_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=cKpnAPkiH8QAX-AVDDD&_nc_ht=scontent-arn2-1.xx&oh=00_AfBnV1gvDAc_VF3Q7quo_IdeDttFaIuOtqsALZg97iZDHg&oe=6604F48D",
+    // },
+    // {
+    //   id: 3,
+    //   title: "Beerpong pub",
+    //   text: "This is the first slide",
+    //   picture: "./logo.png",
+    // },
+  ]);
 
-    const fetchImage = (event) => {
-        // Check if file, `./event_images/${event.id}.png`, exists
-        if (event.id) {
-            const img = "./event_images/" + event.id + ".png";
-            return img;
+
+//   
+const url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events"
+
+const [yearsToExpand, setYearsToExpand] = useState([
+    new Date().getFullYear().toString(),
+]);
+
+const [pastEvents, setPastEvents] = useState([]);
+// Fetch with GET
+useEffect(() => {
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "mode": "no-cors",
+        },
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            // Parse date
+            data.forEach((event) => {
+                // Format year-month-day
+                event[0].event_date = new Date(event[0].event_date).toLocaleDateString();
+            });
+            // Sort by date
+            data.sort((a, b) => new Date(b[0].event_date) - new Date(a[0].event_date));
+
+            // Group by year
+            let years = {};
+            data.forEach((event) => {
+                let year = event[0].event_date.split("-")[0];
+                if (!years[year]) {
+                    years[year] = [];
+                }
+                years[year].push(event);
+            });
+            console.log(years);
+
+            setPastEvents(years);
+        })
+        .catch((err) => console.log(err));
+}, []);
+
+// useEffect(() => {
+//     const years = Object.keys(pastEvents);
+//     setYearsToExpand(years);
+//     console.log(yearsToExpand);
+// }, [pastEvents]);
+
+const toggleShowHide = (year) => {
+    if (yearsToExpand.includes(year)) {
+        setYearsToExpand(yearsToExpand.filter((item) => item !== year));
+    } else {
+        setYearsToExpand([...yearsToExpand, year]);
+    }
+}
+
+const fetchImage = (event) => {
+    if (event[0].img) {
+        const img = "https://dkmstorage.s3.eu-north-1.amazonaws.com/event_images/" + event[0].id + ".png";
+        return img;
+    }
+    return false;
+};
+
+  return (
+    <div class="capsule">
+        {
+            upcomingEvents.length === 0 ? <>
+                <img src="/logo.png" alt="logo" />
+                <h1
+                    style={{
+                        textAlign: "center",
+                        fontSize: "24px",
+                        marginBottom: "50px",
+                    }}
+                > Currently there are no upcoming events, stay tuned! </h1>
+            </> : <>
+                <h1>Events</h1>
+                <div class="carousel_section">
+                    <Carousel items={upcomingEvents} />
+                </div>
+            </>
         }
-        return null;
-    };
+      <h1>Past Events</h1>
+      <div class="container">
+        {/* Loop over the years in reverse order */}
 
-    return (
-        <div class="capsule">
-            <h1>Events</h1>
-            <div class="carousel_section">
-                <Carousel items={upcomingEvents} />
-            </div>
-            <h1>Past Events</h1>
-            <div class="container">
-                {pastEvents.map((event) => {
-                    return (
-                        <Event
+        {Object.keys(pastEvents).reverse().map((year) => {
+            return (
+                <>
+                <h1
+                    onClick={() => toggleShowHide(year)}
+                >{year}</h1>
+                {
+                    yearsToExpand.includes(year) &&
+                    pastEvents[year].map((event) => {
+                        return (
+                            <Event
                             event={{
-                                name: event.event_name,
-                                description: event.event_date,
+                                name: event[0].event_name,
+                                description: event[0].event_date,
                                 image: fetchImage(event) || backupImageUrl,
-                                id: event.id,
+                                id: event[0].id,
                             }}
-                        />
-                    );
-                })}
-                {/* <Event event={{
-                name: "Blums Release PARTY!!!",
-                description: "This is event 1",
-                image: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/421906417_755213529970478_7881443784304176731_n.jpg?stp=dst-jpg_p960x960&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=YbMf76rPG4sAX_-51fN&_nc_ht=scontent-arn2-1.xx&oh=00_AfDU-P1o3XaW2wP2WpJ57lie3cd44_zNamiLRx3WFiUZPw&oe=6603DAB5"
-            }}/> */}
-            </div>
-        </div>
-    );
+                            />
+                        );
+                    })
+                }
+                </>
+            );
+        })}
+      </div>
+    </div>
+  );
 };
 
 export default Events;

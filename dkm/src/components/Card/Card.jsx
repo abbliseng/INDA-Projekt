@@ -8,7 +8,7 @@ return (
     <div class="card"
         style={{
             backgroundImage: `url(${picture})`,
-            maxHeight: fullsize ? "100%" : "300px"
+            width: fullsize ? "100%" : "20vw",
         }}
         onClick={() => {
             if (id != 1) {
