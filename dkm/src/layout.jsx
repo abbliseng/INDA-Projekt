@@ -20,10 +20,6 @@ const Header = ()=>{
                         </li>
                         <div />
                         <li>
-                            <a>Blog</a>
-                        </li>
-                        <div />
-                        <li>
                             <a>About</a>
                         </li>
                         <div />
