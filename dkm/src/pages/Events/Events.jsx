@@ -104,7 +104,7 @@ const fetchImage = (event) => {
     <div class="capsule">
         {
             upcomingEvents.length === 0 ? <>
-                <img src="/logo.png" alt="logo" />
+                <img src="/dkm-logo-white.png" alt="logo" />
                 <h1
                     style={{
                         textAlign: "center",
