@@ -16,10 +16,6 @@ const Event = ({ event }) => {
   );
 };
 
-const Divider = () => {
-    return <div class="division_bar"></div>;
-}
-
 const Events = () => {
   const backupImageUrl = "/logo.png";
   const [upcomingEvents, setUpcomingEvents] = useState([
@@ -82,6 +78,13 @@ useEffect(() => {
                 years[year].push(event);
             });
 
+            // For each year, sort by date, newest first
+            Object.keys(years).forEach((year) => {
+                years[year].sort((a, b) => {
+                    return b[0].event_date - a[0].event_date;
+                });
+            });
+
             setPastEvents(years);
             setLoadingPastEvents(false);
         })
@@ -127,12 +130,11 @@ const fetchImage = (event) => {
       <div class="container">
         {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
             if (year === "Whoops") {
-                // return <h1>Whoops, something went wrong</h1>;
+                // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
                 return <></>;
             }
             return (
                 <>
-                {/* <Divider /> */}
                 <h1
                     onClick={() => toggleShowHide(year)}
                     style={{
