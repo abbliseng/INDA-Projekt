@@ -1,7 +1,32 @@
-
-
+import React, { useState } from 'react';
 
 const Header = ()=>{
+
+    const [showMenu, SetShowMenu] = useState(false);
+
+    const menuItems = (classname)=>{
+        return (
+            <div className={classname}>
+                <ul>
+                    <li>
+                        <a>Home</a>
+                    </li>
+                    <div />
+                    <li>
+                        <a>Events</a>
+                    </li>
+                    <div />
+                    <li>
+                        <a>About</a>
+                    </li>
+                    <div />
+                    <li>
+                        <a>Contact</a>
+                    </li>
+                </ul>
+            </div>
+        )
+    }
 
     return(
         <>
@@ -9,25 +34,17 @@ const Header = ()=>{
                 <div className="logo">
                     <img src="/logo.png" alt="dkm-logo" />
                 </div>
-                <div className="menu">
-                    <ul>
-                        <li>
-                            <a>Home</a>
-                        </li>
-                        <div />
-                        <li>
-                            <a>Events</a>
-                        </li>
-                        <div />
-                        <li>
-                            <a>About</a>
-                        </li>
-                        <div />
-                        <li>
-                            <a>Contact</a>
-                        </li>
-                    </ul>
+                {/* Only shows for mobile view */}
+                <div className="menuDropdown"> 
+                    <img src={showMenu?"/vit-x.png":"/vit-meny.png"} alt="menu" onClick={()=>SetShowMenu(!showMenu)}/>
+                    {
+                        showMenu ? 
+                        menuItems("menuInner"):
+                        null
+                    }
                 </div>
+                {/* Only shows for larger than mobile view :) */}
+                {menuItems("menu")}
             </div>
         </>
     )

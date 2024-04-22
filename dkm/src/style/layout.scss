@@ -17,9 +17,72 @@
             max-height: 100%;
         }
     }
+    @media only screen and (max-width: 600px) {
+        .menuDropdown{
+            display: block !important;
+
+            img{
+                position: absolute;
+                top: 0;
+                right: 0;
+                padding-right: 3vw;
+                padding-top: 3vh;
+                max-height: 6vh;
+                z-index: 10;
+            }
+            .menuInner{
+                display: none;
+                position: absolute;
+                top: 0;
+                right: 0;
+                background-color: rgba(0,0,0,.95);
+                // background: linear-gradient(to bottom, 
+                //     rgba(0, 0, 0, 1) 0%, 
+                //     rgba(0, 0, 0, 1) 60%, 
+                //     rgba(0, 0, 0, .5) 70%, 
+                //     rgba(0, 0, 0, .4) 80%, 
+                //     rgba(0, 0, 0, .3) 90%, 
+                //     rgba(0, 0, 0, 1) 100%
+                // );
+                width: 100vw;
+                height: 60vh;
+                z-index: 1;
+                display: flex;
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                ul{
+                    height: 100%;
+                    list-style-type: none;
+                    display: flex;
+                    justify-content: center;
+                    flex-direction: column;
+                    gap: 20px;
+                    li{
+                        color: $secondary;
+                        font-size: 1.5rem;
+                        text-decoration: none;
+                        transition: all ease .5s;
+                        &:hover{
+                            color: $primary;
+                        }
+                    }
+                }
+            }
+
+        }
+        .menu{
+            display: none;
+        }
+    }
+    .menuDropdown{
+        display: none;
+    }
+
     .menu{
         grid-column: 2/3;
         grid-row: 1/2;
+        margin-right: 3vw;
         ul{
             width: 100%;
             height: 100%;
