@@ -1,8 +1,9 @@
-h1{
-    color: white;
-}
+@import "primary.scss";
 
 .capsule {
+    // margin-top: 35px;
+    margin-bottom: 35px;
+
     width: 100%;
     display: flex;
     // justify-content: center;
@@ -13,14 +14,58 @@ h1{
         width: 80%;
         min-width: 1000px;
         aspect-ratio: 16/9;
+        margin-bottom: 35px;
+    }
+
+    img{
+        max-width: min(90%, 1000px);
+        aspect-ratio: 1/1;
+        object-fit: cover;
+    }
+
+    h1 {
+        min-width: 100px;
+        padding-left: 5px;
+        padding-right: 5px;
     }
 }
 
 .container {
     // background-color: white;
-    width: 80%;
+    width: min(95%, 1600px);
     height: 100%;
     display: flex;
     flex-wrap: wrap;
+    text-align: center;
+
+    .divider {
+        width: 100%;
+        height: 10px;
+        background-color: white;
+        margin: 15px 0;
+    }
+
+    .loader {
+        padding-top: 15px;
+        width: 100%;
+
+        display: flex;
+        justify-content: center;
+    }
+
+    h1{
+        color: white;
+        width: 100%;
+        text-align: center;
+        padding: 5px;
+        border-radius: 5px;
+
+        transition: background-color 0.3s;
+
+        &:hover {
+            background-color: $secondary_dark;
+            cursor: pointer;
+        }
+    }
 }
 

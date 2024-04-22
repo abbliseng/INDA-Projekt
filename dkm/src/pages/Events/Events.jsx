@@ -1,65 +1,167 @@
-import React, { useState } from "react";
-import Carousel from '../../components/Carousel/Carousel';
+import React, { useState, useEffect } from "react";
+import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
+import Loader from "../../components/Loader/Loader";
 
-const Event = ({event})=>{
-    return (
-        <Card title={event.name} description={event.description} picture={event.image}/>
-    )
-}
+const Event = ({ event }) => {
+  return (
+    <Card
+      // when pressed redirect to facebook event with event.id
+      // link={"https://www.facebook.com/events/" + event.id}
+      title={event.name}
+      description={event.description}
+      picture={event.image}
+      id={event.id}
+    />
+  );
+};
 
-const Events = ()=>{
-    const [items, setItems] = useState([
-        {
-          id: 2,
-          title: "PPP",
-          text: "Det är VÅR och det har äntligen blivit dags för årets upplaga av PPP! DKM och CLW slår ihop sig och skapar en magisk kväll som du inte vill missa!",
-          picture: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/431487589_912232430907635_9194427698980121245_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=cKpnAPkiH8QAX-AVDDD&_nc_ht=scontent-arn2-1.xx&oh=00_AfBnV1gvDAc_VF3Q7quo_IdeDttFaIuOtqsALZg97iZDHg&oe=6604F48D"
+const Events = () => {
+  const backupImageUrl = "/logo.png";
+  const [upcomingEvents, setUpcomingEvents] = useState([
+    // {
+    //   id: 2,
+    //   title: "PPP",
+    //   text: "Det är VÅR och det har äntligen blivit dags för årets upplaga av PPP! DKM och CLW slår ihop sig och skapar en magisk kväll som du inte vill missa!",
+    //   picture:
+    //     "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/431487589_912232430907635_9194427698980121245_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=5f2048&_nc_ohc=cKpnAPkiH8QAX-AVDDD&_nc_ht=scontent-arn2-1.xx&oh=00_AfBnV1gvDAc_VF3Q7quo_IdeDttFaIuOtqsALZg97iZDHg&oe=6604F48D",
+    // },
+    // {
+    //   id: 3,
+    //   title: "Beerpong pub",
+    //   text: "This is the first slide",
+    //   picture: "./logo.png",
+    // },
+  ]);
+
+
+//   
+const url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events"
+const [yearsToExpand, setYearsToExpand] = useState([
+    new Date().getFullYear().toString(),
+]);
+const [pastEvents, setPastEvents] = useState([]);
+const [loadingPastEvents, setLoadingPastEvents] = useState(true);
+
+// Fetch with GET
+useEffect(() => {
+    setLoadingPastEvents(true);
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "mode": "no-cors",
         },
-        {
-          id: 1,
-          title: "Blums 2024",
-          text: "This is the first slide",
-          picture: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/421859723_754461693378995_1926863918740628798_n.jpg?stp=dst-jpg_p960x960&_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=yUwLSn0VSsIAX-L52gq&_nc_ht=scontent-arn2-1.xx&oh=00_AfBOaTdf_dwwMeGFyxvpZSezjOEioHVTCkNCzH7T2VLPCA&oe=6603921E"
-        }
-      ]);
+    })
+        .then((res) => res.json())
+        .then((data) => {
+            // Parse date
+            data.forEach((event) => {
+                event[0].event_date = new Date(event[0].event_date);
+            });
+            // Sort by date
+            data.sort((a, b) => {
+                return a[0].event_date - b[0].event_date;
+            });
 
-    return (
-        <div class="capsule">
-            <h1>Events</h1>
-            <div class="carousel_section">
-                <Carousel items={items}/>
-            </div>
-            <h1>Past Events</h1>
-            <div class="container">
-            <Event event={{
-                name: "Blums Release PARTY!!!",
-                description: "This is event 1",
-                image: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/421906417_755213529970478_7881443784304176731_n.jpg?stp=dst-jpg_p960x960&_nc_cat=100&ccb=1-7&_nc_sid=5f2048&_nc_ohc=YbMf76rPG4sAX_-51fN&_nc_ht=scontent-arn2-1.xx&oh=00_AfDU-P1o3XaW2wP2WpJ57lie3cd44_zNamiLRx3WFiUZPw&oe=6603DAB5"
-            }}/>
-            <Event event={{
-                name: "GAMLINGPUB!!",
-                description: "This is event 2",
-                image: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/417527842_771259761699188_7109903889033957802_n.jpg?stp=dst-jpg_p960x960&_nc_cat=108&ccb=1-7&_nc_sid=5f2048&_nc_ohc=ABl1GPdX_XgAX-1qDka&_nc_ht=scontent-arn2-1.xx&oh=00_AfDVkyAdanr1zW1cxBEwWKINGq_-nqx529TNfI5ou_fWYg&oe=66046617"
-            }}/>
-            <Event event={{
-                name: "Biljättsläppspub ft. Vårbalen!!",
-                description: "[Cred till Krollson för ai-bild❤]",
-                image: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/421224992_759015696256928_6200248355325592656_n.jpg?stp=dst-jpg_p960x960&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=vrsGo5Ur11gAX-wOcsF&_nc_ht=scontent-arn2-1.xx&oh=00_AfDrWUo6SIrxldpMcXakBCNZNdu7EIzzQn27C7UE3aiPaQ&oe=66034BB8"
-            }}/>
-            <Event event={{
-                name: "KNATTEPUB",
-                description: "Det är dags för knattarna att visa framfötterna! Kom och häng med oss på puben med exklusiva knattedrinkar och god mat.",
-                image: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/398284298_705049054986926_562435805364878436_n.jpg?stp=dst-jpg_p960x960&_nc_cat=110&ccb=1-7&_nc_sid=5f2048&_nc_ohc=uQdmQegmHc8AX_E3U9M&_nc_ht=scontent-arn2-1.xx&oh=00_AfAnm7hTm45yvqFvcZbJluvPHH_pbggW8xh1w5_KCSakmg&oe=6604D803"
-            }}/>
-            <Event event={{
-                name: "FREDAGSKLUBB",
-                description: "This is event 5",
-                image: "https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-6/399751746_708444607980704_2789137819949275066_n.jpg?stp=dst-jpg_p960x960&_nc_cat=101&ccb=1-7&_nc_sid=5f2048&_nc_ohc=IoDprKC5M9wAX80GBzh&_nc_ht=scontent-arn2-1.xx&oh=00_AfDaaNeWlFZ1KPXAcniRI9RKYgtrosh3eKQvNzMFA_p5pQ&oe=66034DE0"
-            }}/>
-        </div>
-        </div>
-    )
+            // Group by year
+            let years = {};
+            data.forEach((event) => {
+                const year = event[0].event_date.getFullYear();
+                if (isNaN(year)) {
+                    return;
+                }
+
+                if (!years[year]) {
+                    years[year] = [];
+                }
+                years[year].push(event);
+            });
+
+            // For each year, sort by date, newest first
+            Object.keys(years).forEach((year) => {
+                years[year].sort((a, b) => {
+                    return b[0].event_date - a[0].event_date;
+                });
+            });
+
+            setPastEvents(years);
+            setLoadingPastEvents(false);
+        })
+        .catch((err) => console.log(err));
+}, []);
+
+const toggleShowHide = (year) => {
+    if (yearsToExpand.includes(year)) {
+        setYearsToExpand(yearsToExpand.filter((item) => item !== year));
+    } else {
+        setYearsToExpand([...yearsToExpand, year]);
+    }
 }
+
+const fetchImage = (event) => {
+    if (event[0].img) {
+        const img = "https://dkmstorage.s3.eu-north-1.amazonaws.com/event_images/" + event[0].id + ".png";
+        return img;
+    }
+    return false;
+};
+
+  return (
+    <div class="capsule">
+        {
+            upcomingEvents.length === 0 ? <>
+                <img src="/dkm-logo-white.png" alt="logo" />
+                <h1
+                    style={{
+                        textAlign: "center",
+                        fontSize: "24px",
+                        marginBottom: "50px",
+                    }}
+                > Currently there are no upcoming events, stay tuned! </h1>
+            </> : <>
+                <h1>Events</h1>
+                <div class="carousel_section">
+                    <Carousel items={upcomingEvents} />
+                </div>
+            </>
+        }
+      <h1>Past Events</h1>
+      <div class="container">
+        {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
+            if (year === "Whoops") {
+                // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
+                return <></>;
+            }
+            return (
+                <>
+                <h1
+                    onClick={() => toggleShowHide(year)}
+                    style={{
+                        fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
+                    }}
+                >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
+                {
+                    yearsToExpand.includes(year) &&
+                    pastEvents[year].map((event) => {
+                        return (
+                            <Event
+                            event={{
+                                name: event[0].event_name,
+                                description: event[0].event_date.toDateString(),
+                                image: fetchImage(event) || backupImageUrl,
+                                id: event[0].id,
+                            }}
+                            />
+                        );
+                    })
+                }
+                </>
+            );
+        }) : <div className="loader"><Loader /></div>}
+      </div>
+    </div>
+  );
+};
 
 export default Events;
