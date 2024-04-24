@@ -43,6 +43,21 @@ const [yearsToExpand, setYearsToExpand] = useState([
 const [pastEvents, setPastEvents] = useState([]);
 const [loadingPastEvents, setLoadingPastEvents] = useState(true);
 
+useEffect(() => {
+
+    // Reformat the events
+    const upcoming = upcomingEvents.map((event) => {
+        return {
+            name: event[0].event_name,
+            description: event[0].event_date.toDateString(),
+            image: fetchImage(event) || backupImageUrl,
+            id: event[0].id,
+        }
+    });
+    setUpcomingEvents(upcoming);
+
+}, [pastEvents]);
+
 // Fetch with GET
 useEffect(() => {
     setLoadingPastEvents(true);
@@ -66,6 +81,17 @@ useEffect(() => {
 
             // Group by year
             let years = {};
+            
+            // If the event_date hasnt occured yet, add to upcomingEvents
+            const upcomingEvents = data.filter((event) => {
+                return event[0].event_date > new Date();
+            });
+            setUpcomingEvents(upcomingEvents);
+            // Filter them out from the pastEvents
+            data = data.filter((event) => {
+                return event[0].event_date < new Date();
+            });
+
             data.forEach((event) => {
                 const year = event[0].event_date.getFullYear();
                 if (isNaN(year)) {
@@ -101,7 +127,11 @@ const toggleShowHide = (year) => {
 
 const fetchImage = (event) => {
     if (event[0].img) {
-        const img = "https://dkmstorage.s3.eu-north-1.amazonaws.com/event_images/" + event[0].id + ".png";
+        // If the event_date is before 2024-04-24, the image is stored as a png
+        if (event[0].event_date < new Date("2024-04-24")) {
+            return "https://dkmstorage.s3.eu-north-1.amazonaws.com/event_images/" + event[0].id + ".png";
+        }
+        const img = "https://dkmstorage.s3.eu-north-1.amazonaws.com/event_images/" + event[0].id + ".jpg";
         return img;
     }
     return false;

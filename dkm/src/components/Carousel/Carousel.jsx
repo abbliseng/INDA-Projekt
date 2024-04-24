@@ -22,7 +22,12 @@ const Carousel = ({items}) => {
           <div class="section" onClick={handleNext}></div>
       </div>
       <div class="inner">
-        <Card {...items[index]} fullsize={true}/>
+        <Card 
+          title={items[index].name}
+          description={items[index].description}
+          picture={items[index].image}
+          id={items[index].id}
+        fullsize={true}/>
       </div>
       <div class="dots">
         {items.map((item, i) => (
