@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
 import Loader from "../../components/Loader/Loader";
+import BackgroundCarousel from "../../components/Carousel/BackgroundCarousel";
 
 const Event = ({ event }) => {
   return (
@@ -39,56 +40,56 @@ const Events = () => {
   }, [pastEvents]);
 
   // Fetch with GET
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoadingPastEvents(true);
-      try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "mode": "no-cors",
-          },
-        });
-        const data = await response.json();
-  
-        // Parse date, sort by date
-        data.forEach(event => {
-          event[0].event_date = new Date(event[0].event_date);
-        });
-        data.sort((a, b) => a[0].event_date - b[0].event_date);
-  
-        // Group by year
-        const years = {};
-        const currentDate = new Date();
-        const upcomingEvents = [];
-        
-        data.forEach(event => {
-          const eventDate = event[0].event_date;
-          if (eventDate > currentDate) {
-            upcomingEvents.push(event);
-          } else {
-            const year = eventDate.getFullYear();
-            if (!isNaN(year)) {
-              years[year] = years[year] || [];
-              years[year].push(event);
-            }
+  const fetchData = async () => {
+    setLoadingPastEvents(true);
+    try {
+      const response = await fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "mode": "no-cors",
+        },
+      });
+      const data = await response.json();
+
+      // Parse date, sort by date
+      data.forEach(event => {
+        event[0].event_date = new Date(event[0].event_date);
+      });
+      data.sort((a, b) => a[0].event_date - b[0].event_date);
+
+      // Group by year
+      const years = {};
+      const currentDate = new Date();
+      const upcomingEvents = [];
+      
+      data.forEach(event => {
+        const eventDate = event[0].event_date;
+        if (eventDate > currentDate) {
+          upcomingEvents.push(event);
+        } else {
+          const year = eventDate.getFullYear();
+          if (!isNaN(year)) {
+            years[year] = years[year] || [];
+            years[year].push(event);
           }
-        });
-  
-        // Sort events within each year
-        Object.values(years).forEach(eventsInYear => {
-          eventsInYear.sort((a, b) => b[0].event_date - a[0].event_date);
-        });
-  
-        setUpcomingEvents(upcomingEvents);
-        setPastEvents(years);
-        setLoadingPastEvents(false);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-  
+        }
+      });
+
+      // Sort events within each year
+      Object.values(years).forEach(eventsInYear => {
+        eventsInYear.sort((a, b) => b[0].event_date - a[0].event_date);
+      });
+
+      setUpcomingEvents(upcomingEvents);
+      setPastEvents(years);
+      setLoadingPastEvents(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
     fetchData();
   }, []);
   
@@ -107,11 +108,15 @@ const Events = () => {
     }
     return false;
   };
-  
 
   return (
     <div class="page">
-      <div class="capsule">
+        {loadingPastEvents ? <div className="loader"><Loader /></div> : <>
+            <BackgroundCarousel
+                items={upcomingEvents}
+            />
+        </>}
+      {/* <div class="capsule">
             {
                 upcomingEvents.length === 0 ? <>
                     <img src="/dkm-logo-white.png" alt="logo" />
@@ -163,7 +168,7 @@ const Events = () => {
                 );
             }) : <div className="loader"><Loader /></div>}
         </div>
-        </div>
+        </div> */}
     </div>
   );
 };

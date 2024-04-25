@@ -9,6 +9,7 @@
     justify-content: space-between;
     width: 100%;
     overflow: hidden;
+
     .logo{
         margin: 3px;
         grid-column: 1/2;
@@ -48,6 +49,6 @@
 }
 
 .footer{
-    min-height: 5vh;
+    min-height: 40px;
     background-color: coral;
 }
