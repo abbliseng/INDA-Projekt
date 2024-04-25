@@ -1,6 +1,9 @@
 {
   "dependencies": {
+    "aws-sdk": "^2.1605.0",
+    "node-fetch": "^2.7.0",
     "puppeteer": "^22.6.1",
-    "sass": "^1.72.0"
+    "sass": "^1.72.0",
+    "uuid": "^9.0.1"
   }
 }
