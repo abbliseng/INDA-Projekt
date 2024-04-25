@@ -7,7 +7,7 @@
     margin: 10px;
     flex-grow: 1;
 
-    min-width: min(500px, 90%);
+    min-width: min(250px, 90%);
     aspect-ratio: 16/9;
 
     background-repeat: no-repeat;
@@ -37,6 +37,7 @@
         justify-content: center;
 
         overflow: hidden;
+        font-size: 0.9em;
 
         .desc {
             visibility: hidden;

@@ -138,58 +138,60 @@ const fetchImage = (event) => {
 };
 
   return (
-    <div class="capsule">
-        {
-            upcomingEvents.length === 0 ? <>
-                <img src="/dkm-logo-white.png" alt="logo" />
-                <h1
-                    style={{
-                        textAlign: "center",
-                        fontSize: "24px",
-                        marginBottom: "50px",
-                    }}
-                > Currently there are no upcoming events, stay tuned! </h1>
-            </> : <>
-                <h1>Events</h1>
-                <div class="carousel_section">
-                    <Carousel items={upcomingEvents} />
-                </div>
-            </>
-        }
-      <h1>Past Events</h1>
-      <div class="container">
-        {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
-            if (year === "Whoops") {
-                // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
-                return <></>;
-            }
-            return (
-                <>
-                <h1
-                    onClick={() => toggleShowHide(year)}
-                    style={{
-                        fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
-                    }}
-                >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
-                {
-                    yearsToExpand.includes(year) &&
-                    pastEvents[year].map((event) => {
-                        return (
-                            <Event
-                            event={{
-                                name: event[0].event_name,
-                                description: event[0].event_date.toDateString(),
-                                image: fetchImage(event) || backupImageUrl,
-                                id: event[0].id,
-                            }}
-                            />
-                        );
-                    })
-                }
+    <div class="page">
+        <div class="capsule">
+            {
+                upcomingEvents.length === 0 ? <>
+                    <img src="/dkm-logo-white.png" alt="logo" />
+                    <h1
+                        style={{
+                            textAlign: "center",
+                            fontSize: "24px",
+                            marginBottom: "50px",
+                        }}
+                    > Currently there are no upcoming events, stay tuned! </h1>
+                </> : <>
+                    <h1>Events</h1>
+                    <div class="carousel_section">
+                        <Carousel items={upcomingEvents} />
+                    </div>
                 </>
-            );
-        }) : <div className="loader"><Loader /></div>}
-      </div>
+            }
+        <h1>Past Events</h1>
+        <div class="container">
+            {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
+                if (year === "Whoops") {
+                    // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
+                    return <></>;
+                }
+                return (
+                    <>
+                    <h1
+                        onClick={() => toggleShowHide(year)}
+                        style={{
+                            fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
+                        }}
+                    >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
+                    {
+                        yearsToExpand.includes(year) &&
+                        pastEvents[year].map((event) => {
+                            return (
+                                <Event
+                                event={{
+                                    name: event[0].event_name,
+                                    description: event[0].event_date.toDateString(),
+                                    image: fetchImage(event) || backupImageUrl,
+                                    id: event[0].id,
+                                }}
+                                />
+                            );
+                        })
+                    }
+                    </>
+                );
+            }) : <div className="loader"><Loader /></div>}
+        </div>
+        </div>
     </div>
   );
 };
