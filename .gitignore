@@ -1,4 +1,5 @@
 .env
+.credentials
 database.sh
 mnt/
 node_modules/

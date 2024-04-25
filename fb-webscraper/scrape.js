@@ -1,147 +1,207 @@
+
+// NOTE: Init AWS
+var AWS = require("aws-sdk");
+var uuid = require("uuid");
+const fetch = require('node-fetch');
+
+var credentials = new AWS.SharedIniFileCredentials({profile: 'infom'});
+// var bucketName = "dkmstorage/event_images";
+var bucketName = "dkmstorage";
+AWS.config.credentials = credentials;
+
+// Set region
+AWS.config.update({ region: "eu-west-2" });
+// Start s3
+var s3 = new AWS.S3();
+// Start dynamodb
+const docClient = new AWS.DynamoDB.DocumentClient();
+
+async function UploadImage(event) {
+    const res = await fetch(event.img_url);
+    const img_blob = await res.buffer();
+
+    const uploadedImage = await s3.upload({
+        Bucket: bucketName,
+        Key: "event_images/" + event.id + ".jpg",
+        Body: img_blob,
+        ContentType: "image/jpeg",
+    }).promise();
+
+    console.log("Uploaded image: ", uploadedImage.Location);
+    return;
+}
+
+async function PutItem(event) {
+    const params = {
+        TableName: "events",
+        Item: event,
+    };
+
+    docClient.put(params, function (err, data) {
+        if (err) {
+            console.error("Unable to add event", event.id, ". Error JSON:", JSON.stringify(err, null, 2));
+        } else {
+            console.log("PutItem succeeded:", event.id);
+        }
+    });
+}
+
+// NOTE: Init Puppeteer
 const puppeteer = require("puppeteer");
 
-async function ScrapeEvents() {
+async function Login(page) {
+    await page.waitForSelector(
+        "#m_login_email"
+    );
+    await page.type("#m_login_email", n);
+    await page.type("#password_input_with_placeholder > input", b);
+    await page.click("#login_form > ul > li:nth-child(3) > input");
+
+    return;
+}
+
+async function FetchImages(browser, data) {
+    data.map(async (event) => {
+        const url = "https://mbasic.facebook.com/events/" + event.id;
+        const new_page = await browser.newPage();
+        await new_page.goto(url);
+        const img = await new_page.evaluate(() => {
+            const img = document.querySelector("#event_header > a > img");
+            return img ? img.getAttribute("src") : false;
+        });
+        if (!img) {
+            return event;
+        }
+        event.img_url = img;
+        event.img = true;
+        new_page.close();
+        return event;
+    });
+    // Wait for all images to be fetched
+    await new Promise((resolve) => {
+        const interval = setInterval(() => {
+            if (data.filter((event) => !event.img).length == 0) {
+                clearInterval(interval);
+                resolve();
+            }
+        }, 1000);
+    });
+    return data;
+}
+
+async function Scrape(page) {
+    await page.waitForSelector(
+        "#structured_composer_async_container > section"
+    );
+    const data = await page.evaluate(() => {
+        const tds = Array.from(
+            document.querySelectorAll("#structured_composer_async_container > section")
+        );
+        return tds.map((td) => {
+            // For all children of the td, get the text
+            const children = Array.from(td.children);
+            return children.map((child) => {
+                // Parse event id
+                let event_info = child.querySelector("div._5rgo._27x0 > div");
+                const event_id = event_info.querySelector("a").getAttribute("href").split("/")[2].split("?")[0];
+                console.log(event_id);
+
+                event_info = event_info.querySelector("a > table > tbody > tr")
+                const event_name = event_info.querySelector("td._4g34 > h3").innerText;
+                console.log(event_info);
+
+                let event_date = event_info.querySelector("td._5s61 > div").innerText.replace("\n", " ");
+
+                if (event_date.split(" ").length == 2) {
+                    event_date += " " + new Date().getFullYear();
+                }
+                const months = {
+                    "JAN": "01",
+                    "FEB": "02",
+                    "MAR": "03",
+                    "APR": "04",
+                    "MAY": "05",
+                    "JUN": "06",
+                    "JUL": "07",
+                    "AUG": "08",
+                    "SEP": "09",
+                    "OCT": "10",
+                    "NOV": "11",
+                    "DEC": "12",
+                };
+                event_date = event_date.split(" ");
+                event_date = event_date[2] + "-" + months[event_date[1]] + "-" + event_date[0];
+
+                const event = {
+                    id: event_id,
+                    event_name: event_name,
+                    event_date: event_date,
+                    img: false,
+                };
+
+                return event;
+            });
+        });
+    });
+
+    return data[0];
+}
+
+async function Main() {
+    // Get the stored events
+    const fetch_url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events"
+    const fetch_data = await fetch(fetch_url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "mode": "no-cors",
+        },
+    }).then((res) => res.json());
+
+    // Fetch the data
+    const url = "https://mbasic.facebook.com/datasklubbmasteri?v=timeline";
     const browser = await puppeteer.launch({
         headless: false,
     });
     const page = await browser.newPage();
-    await page.goto('https://www.facebook.com/datasklubbmasteri/upcoming_hosted_events');
+    await page.goto(url);
 
-    let selector =
-        "body > div.__fb-light-mode.x1n2onr6.x1vjfegm > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x1exxf4d.x13fuv20.x178xt8z.x1l90r2v.x1pi30zi.x1swvt13 > div > div:nth-child(1)";
-    let exists = await page.$eval(selector, () => true).catch(() => false);
-    if (exists) {
-        //   If the selector is found, click it
-        await page.click(
-            "body > div.__fb-light-mode.x1n2onr6.x1vjfegm > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x1exxf4d.x13fuv20.x178xt8z.x1l90r2v.x1pi30zi.x1swvt13 > div > div:nth-child(1)"
-        );
-    }
-    selector =
-        "div > div > div:nth-child(1) > div > div:nth-child(5) > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x92rtbv.x10l6tqk.x1tk7jg1.x1vjfegm > div";
-    exits = await page.$eval(selector, () => true).catch(() => false);
-    if (exists) {
-        await page.click(
-            "div > div > div:nth-child(1) > div > div:nth-child(5) > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x92rtbv.x10l6tqk.x1tk7jg1.x1vjfegm > div"
-        );
-    }
-
+    // Handle decline cookies
     await page.waitForSelector(
-        "div > div > div:nth-child(1) > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div > div.x78zum5.xdt5ytf.x1t2pt76.x1n2onr6.x1ja2u2z.x10cihs4 > div.x78zum5.xdt5ytf.x1t2pt76 > div > div > div.x6s0dn4.x78zum5.xdt5ytf.x193iq5w > div > div > div > div > div > div > div > div > div.x78zum5.x1q0g3np.x1a02dak.x1qughib"
+        "div > button.br"
     );
-    // Scroll down as much as possible
-    await page.evaluate(async () => {
-        await new Promise((resolve, reject) => {
-            var totalHeight = 0;
-            var distance = 100;
-            var timer = setInterval(() => {
-                var scrollHeight = document.body.scrollHeight;
-                window.scrollBy(0, distance);
-                totalHeight += distance;
+    await page.click("div > button.br");
 
-                if (totalHeight >= scrollHeight) {
-                    clearInterval(timer);
-                    resolve();
-                }
-            }, 200);
-        });
+    await Login(page);
+    
+    await page.waitForSelector(
+        "#structured_composer_async_container > section"
+    );
+
+    const data = await Scrape(page);
+    // If the event_id is already in the database, skip
+    filtered_data = data.filter((event) => {
+        return !fetch_data.find((db_event) => db_event[0].id == event.id);
     });
-    // For each div in the above selector, get the text
-    const data = await page.evaluate(() => {
-        const tds = Array.from(
-            document.querySelectorAll("div.x6s0dn4.x1lq5wgf.xgqcy7u")
-        );
-        console.log(tds.length);
-        return tds.map((td) => {
-            // Select add that also are a child of the td
-            const spans = Array.from(td.querySelectorAll("span.x1lliihq.x6ikm8r"));
-            const hrefs = Array.from(td.querySelectorAll("a.x1i10hfl.xjbqb8w"));
 
-            if (spans.length < 2) {
-                return null;
-            }
-
-            const event_data = {
-                event_date: spans[0].innerText,
-                event_name: spans[1].innerText,
-                event_link: hrefs[0].href,
-            };
-            // Get the text from each span
-            return event_data;
-        });
-    });
-    // Get the img for each event
-    const data_with_img = await GetImages(data, page);
-
-    await browser.close();
-
-    // Reformato to objects where the event_url is the key
-    const events = data.reduce((acc, event) => {
-        if (event.img_url) {
-            acc[event.event_link] = {
-                event_date: event.event_date,
-                event_name: event.event_name,
-                img_url: event.img_url,
-            };
-        } else {
-            acc[event.event_link] = {
-                event_date: event.event_date,
-                event_name: event.event_name,
-            };
+    const data_with_img = await FetchImages(browser, filtered_data);
+    
+    // NOTE: Post the data to dynamoDB and the images to S3 bucket
+    // Upload the images to S3
+    data_with_img.map((event) => {
+        if (event.img) {
+            console.log("Uploading image for event: ", event.id);
+            UploadImage(event);
+            PutItem(event);
         }
-        return acc;
-    }, {});
+    });
+    
+    // console.log(data_with_img);
 
-    return events;
+    page.close();
+    browser.close();
+    return data_with_img;
+
 }
 
-async function GetImages(data, page) {
-    for (let i = 0; i < data.length; i++) {
-        // console.log("Getting img for event", i + 1, "of", data.length)
-        const event = data[i];
-        // If the event already has an img_url, continue to next iteration
-        if (event.img_url) {
-            continue;
-        }
-        await page.goto(event.event_link);
-
-        let selector = "body > div.__fb-light-mode.x1n2onr6.x1vjfegm > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x1exxf4d.x13fuv20.x178xt8z.x1l90r2v.x1pi30zi.x1swvt13 > div > div:nth-child(1)";
-        let exists = await page.$eval(selector, () => true).catch(() => false)
-        if (exists) {
-            //   If the selector is found, click it
-            await page.click(
-                "body > div.__fb-light-mode.x1n2onr6.x1vjfegm > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x1exxf4d.x13fuv20.x178xt8z.x1l90r2v.x1pi30zi.x1swvt13 > div > div:nth-child(1)"
-            );
-        }
-        selector = "div > div > div:nth-child(1) > div > div:nth-child(5) > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x92rtbv.x10l6tqk.x1tk7jg1.x1vjfegm > div";
-        exits = await page.$eval(selector, () => true).catch(() => false)
-        if (exists) {
-            await page.click(
-                "div > div > div:nth-child(1) > div > div:nth-child(5) > div > div > div.x9f619.x1n2onr6.x1ja2u2z > div > div.x1uvtmcs.x4k7w5x.x1h91t0o.x1beo9mf.xaigb6o.x12ejxvf.x3igimt.xarpa2k.xedcshv.x1lytzrv.x1t2pt76.x7ja8zs.x1n2onr6.x1qrby5j.x1jfb8zj > div > div > div > div.x92rtbv.x10l6tqk.x1tk7jg1.x1vjfegm > div"
-            );
-        }
-        selector = "img.xz74otr";
-        exists = await page.$eval(selector, () => true).catch(() => false)
-        if (!exists) {
-            console.log("Could not find img for event", i + 1, "of", data.length);
-            continue;
-        }
-        //   Get img
-        const img_url = await page.evaluate(() => {
-            // Copy the img url
-            const imgs = document.querySelectorAll("img.xz74otr.x1ey2m1c.x9f619.xds687c.x5yr21d.x10l6tqk.x17qophe.x13vifvy.xh8yej3");
-            const img_srcs = Array.from(imgs).map((img) => img.src);
-            return img_srcs[1];
-        });
-
-        const new_event = {
-            ...event,
-            img_url,
-        };
-        data[i] = new_event;
-    }
-    return data;
-}
-
-ScrapeEvents().then((events) => {
-    console.log(events);
-});
+Main();
