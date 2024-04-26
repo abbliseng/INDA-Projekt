@@ -3,6 +3,7 @@ import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
 import Loader from "../../components/Loader/Loader";
 import BackgroundCarousel from "../../components/Carousel/BackgroundCarousel";
+import SlidingCarousel from "../../components/Carousel/SlidingCarousel";
 
 const Event = ({ event }) => {
   return (
@@ -65,7 +66,7 @@ const Events = () => {
       
       data.forEach(event => {
         const eventDate = event[0].event_date;
-        if (eventDate > currentDate) {
+        if (eventDate >= currentDate) { // FIXME: Events that occur later the same day are not shown
           upcomingEvents.push(event);
         } else {
           const year = eventDate.getFullYear();
@@ -116,26 +117,25 @@ const Events = () => {
                 items={upcomingEvents}
             />
         </>}
-      {/* <div class="capsule">
+        {/* <div class="past">
+            <h1>Past Events</h1>
             {
-                upcomingEvents.length === 0 ? <>
-                    <img src="/dkm-logo-white.png" alt="logo" />
-                    <h1
-                        style={{
-                            textAlign: "center",
-                            fontSize: "24px",
-                            marginBottom: "50px",
-                        }}
-                    > Currently there are no upcoming events, stay tuned! </h1>
-                </> : <>
-                    <h1>Events</h1>
-                    <div class="carousel_section">
-                        <Carousel items={upcomingEvents} />
-                    </div>
-                </>
+                !loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
+                    if (year === "Whoops") {
+                        return <></>;
+                    }
+                    return (<div class="year">
+                        <h1>{year}</h1>
+                        <SlidingCarousel
+                            items={pastEvents[year]}
+                        />
+                    </div>)
+                }) : <></>
             }
-        <h1>Past Events</h1>
+        </div> */}
+        <div class="capsule">
         <div class="container">
+
             {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
                 if (year === "Whoops") {
                     // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
@@ -168,7 +168,7 @@ const Events = () => {
                 );
             }) : <div className="loader"><Loader /></div>}
         </div>
-        </div> */}
+        </div>
     </div>
   );
 };
