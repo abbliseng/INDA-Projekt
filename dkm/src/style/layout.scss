@@ -10,7 +10,8 @@
     width: 100%;
     overflow: hidden;
     .logo{
-        margin: 3px;
+        margin: 10px;
+        margin-left: 3vw;
         grid-column: 1/2;
         grid-row: 1/2;
         img{
@@ -97,13 +98,13 @@
             justify-content: space-around;
             align-items: center;
             li{
-                padding: 3vh 3vw;
                 &:hover{
                     a{
                         color: $data !important;
                     }
                 }
                 a{
+                    padding: 3vh 3vw;
                     text-decoration: none;
                     color: $secondary;
                     transition: all ease .5s;
