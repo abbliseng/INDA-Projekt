@@ -32,7 +32,7 @@ const Header = ()=>{
         <>
             <div className="header">
                 <div className="logo">
-                    <img src="/logo.png" alt="dkm-logo" />
+                    <img href= "/" src="/logo.png" alt="dkm-logo" />
                 </div>
                 {/* Only shows for mobile view */}
                 <div className="menuDropdown"> 
