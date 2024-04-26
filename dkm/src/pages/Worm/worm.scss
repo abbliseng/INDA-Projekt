@@ -1,0 +1,22 @@
+.worm-container {
+    z-index: 1;
+    position: relative;
+    height: 50vh; /* adjust to your preference */
+    width: 100%; /* adjust to your preference */
+    overflow: hidden; /* hide anything that goes outside the container */
+}
+
+.worm {
+    position: absolute;
+    left: -100%; /* start off the screen to the left */
+    animation: scroll 7s linear infinite; /* use the scroll animation */
+}
+
+@keyframes scroll {
+    0% {
+        left: 100%;
+    }
+    100% {
+        left: -100%;
+    }
+}
