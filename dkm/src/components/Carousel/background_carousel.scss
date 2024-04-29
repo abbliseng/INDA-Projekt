@@ -1,0 +1,72 @@
+.main {
+    // Shift it up 75px to account for the header
+    // margin-top: -75px;
+    min-height: calc(82vh - 75px - 40px); // 75px header, 40px footer
+    // outline: 1px solid white;
+    background-size: cover;
+    // background-position: center;
+    width: 100%;
+
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: end;
+
+    .content {
+        // padding: 100px;
+        width: 100%;
+        text-align: center;
+    }
+
+    .dots {
+        margin-top: 10px;
+        width: 100%;
+
+        button {
+            background-color: #585858;
+            border: none;
+            border-radius: 50%;
+            height: 10px;
+            width: 10px;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .active {
+            background-color: white;
+        }
+    }
+
+    .overlay {
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        .section {
+            flex-grow: 1;
+        }
+
+        button {
+            background-color: transparent;
+            border: none;
+            color: white;
+            height: 100%;
+            width: min(50px, 10%);
+
+            img {
+                width: min(100%, 20px);
+                aspect-ratio: 1/1;
+                &:hover {
+                    // Make it slightly larger
+                    transform: scale(1.4);
+                    cursor: pointer;
+                }
+            }
+
+        }
+    }
+
+}
