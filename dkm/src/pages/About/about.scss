@@ -23,6 +23,19 @@
             margin-top: 1rem;
             margin-bottom: 1rem;
         }
+
+        .images {
+            margin-top: 1rem;
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+
+            img {
+                max-width: min(100%, 300px);
+            }
+        }
     }
 
 }
