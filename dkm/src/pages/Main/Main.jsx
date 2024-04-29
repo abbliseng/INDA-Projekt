@@ -4,7 +4,7 @@ import BackgroundCarousel from '../../components/Carousel/BackgroundCarousel';
 
 const Main = () => {
     return (
-        <div class="container">
+        <div class="con">
             <BackgroundCarousel 
                 items = {[{}]}
                 page_specific = {"main"}
