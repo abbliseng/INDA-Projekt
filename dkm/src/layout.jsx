@@ -16,9 +16,6 @@ const Header = ()=>{
                         <a href="/events">Events</a>
                     </li>
                     <div />
-                    <li>
-                        <a href="/stella">Stella</a>
-                    </li>
                     <div />
                     <li>
                         <a href="/worm">Worm🪱</a>

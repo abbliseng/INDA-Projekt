@@ -113,9 +113,21 @@ const Events = () => {
   return (
     <div class="page">
         {loadingPastEvents ? <div className="loader"><Loader /></div> : <>
+        {upcomingEvents.length > 0 ?
             <BackgroundCarousel
                 items={upcomingEvents}
             />
+            : <div class="no-upcoming">
+            <img src="/dkm-logo-white.png" alt="logo" />
+            <h1
+                style={{
+                    textAlign: "center",
+                    fontSize: "24px",
+                    marginBottom: "50px",
+                }}
+            > Currently there are no upcoming events, stay tuned! </h1>
+        </div>
+        }
         </>}
         {/* <div class="past">
             <h1>Past Events</h1>

@@ -41,6 +41,14 @@
     }
 }
 
+.no-upcoming {
+    // height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
 .capsule {
     margin-top: 35px;
     margin-bottom: 35px;
