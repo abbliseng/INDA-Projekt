@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "./background_carousel.scss";
 // import "./carousel.scss";
 
-const BackgroundCarousel = ({items}) => {
+const BackgroundCarousel = ({items, page_specific = false}) => {
     const [index, setIndex] = useState(0);
     const handlePrevious = () => {
       const newIndex = index - 1;
@@ -25,6 +25,20 @@ const BackgroundCarousel = ({items}) => {
     ></div>
       );
     }
+
+    if (page_specific == "main") {
+      return (
+        <div
+      class="main"
+      style={{
+        // backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('https://dkmstorage.s3.eu-north-1.amazonaws.com/logo-movie.gif')`,
+        backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('https://dkmstorage.s3.eu-north-1.amazonaws.com/group_pictures/2334.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+    ></div>
+      );
+    } 
 
   return (
     <div
