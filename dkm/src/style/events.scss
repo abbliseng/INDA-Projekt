@@ -3,47 +3,87 @@
 .page {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    // align-items: center;
+    // justify-content: center;
     width: 100%;
-    height: 100%;
+    min-height: calc(100vh - 75px - 40px); // 75px header, 40px footer
     color: white;
+
+    .loader {
+        padding-top: 15px;
+        width: 100%;
+        height: 80vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .past {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        margin-top: 45px;
+
+        h1 {
+            text-align: center;
+            width: 100%;
+        }
+
+        .year {
+            
+            h1 {
+                margin-left: 50px;
+                width: auto;
+                text-align: start;
+            }
+        }
+    }
+}
+
+.no-upcoming {
+    // height: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 }
 
 .capsule {
-    // margin-top: 35px;
+    margin-top: 35px;
     margin-bottom: 35px;
 
     width: min(95%, 1000px);
+    width: 100%;
     display: flex;
     // justify-content: center;
     align-items: center;
     flex-direction: column;
 
-    .carousel_section {
-        width: 100%;
-        // min-width: 1000px;
-        aspect-ratio: 16/9;
-        margin-bottom: 35px;
-    }
+    // .carousel_section {
+    //     width: 100%;
+    //     // min-width: 1000px;
+    //     aspect-ratio: 16/9;
+    //     margin-bottom: 35px;
+    // }
 
-    img{
-        max-width: min(90%, 1000px);
-        aspect-ratio: 1/1;
-        object-fit: cover;
-    }
+    // img{
+    //     max-width: min(90%, 1000px);
+    //     aspect-ratio: 1/1;
+    //     object-fit: cover;
+    // }
 
-    h1 {
-        min-width: 100px;
-        padding-left: 5px;
-        padding-right: 5px;
-        font-size: 1.5em;
-    }
+    // h1 {
+    //     min-width: 100px;
+    //     padding-left: 5px;
+    //     padding-right: 5px;
+    //     font-size: 1.5em;
+    // }
 }
 
 .container {
     // background-color: white;
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-wrap: wrap;
     text-align: center;
