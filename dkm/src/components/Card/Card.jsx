@@ -17,7 +17,7 @@ return (
             }
         }}
     >
-        <div class="content"
+        {/* <div class="content"
             onMouseEnter={(e)=>{
                 setHover(true);
             }}
@@ -27,7 +27,7 @@ return (
         >
             <h2>{title}</h2>
             <p class="desc">{description}</p>
-        </div>
+        </div> */}
     </div>
   );
 };

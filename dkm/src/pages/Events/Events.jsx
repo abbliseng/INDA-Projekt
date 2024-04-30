@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Carousel from "../../components/Carousel/Carousel";
 import Card from "../../components/Card/Card";
 import Loader from "../../components/Loader/Loader";
@@ -21,9 +21,6 @@ const Events = () => {
   const [upcomingEvents, setUpcomingEvents] = useState([]);
 
   const url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events";
-  const [yearsToExpand, setYearsToExpand] = useState([
-    new Date().getFullYear().toString(),
-  ]);
   const [pastEvents, setPastEvents] = useState([]);
   const [loadingPastEvents, setLoadingPastEvents] = useState(true);
 
@@ -61,7 +58,12 @@ const Events = () => {
 
       // Group by year
       const years = {};
-      const currentDate = new Date();
+      const currentDate = new Date("2024-04-15");// new Date();
+      currentDate.setHours(23, 59, 59, 999);
+
+      // NOTE: Temporarily set current date to first of January 2024 to show all events
+      // currentDate = new Date("2024-01-01");
+
       const upcomingEvents = [];
       
       data.forEach(event => {
@@ -92,15 +94,7 @@ const Events = () => {
 
   useEffect(() => {
     fetchData();
-  }, []);
-  
-
-  const toggleShowHide = (year) => {
-    setYearsToExpand(
-      yearsToExpand.includes(year) ? yearsToExpand.filter(item => item !== year) : [...yearsToExpand, year]
-    );
-  };
-  
+  }, []);  
 
   const fetchImage = (event) => {
     if (event[0].img) {
@@ -108,6 +102,13 @@ const Events = () => {
       return `https://dkmstorage.s3.eu-north-1.amazonaws.com/event_images/${event[0].id}${imageType}`;
     }
     return false;
+  };
+
+  // NOTE: Scroll on button press stuff
+  const ref = useRef(null);
+  const scroll = (scrollOffset) => {
+    console.log(ref.current.scrollLeft);
+    ref.current.scrollLeft += scrollOffset;
   };
 
   return (
@@ -129,59 +130,36 @@ const Events = () => {
               > Currently there are no upcoming events, stay tuned! </h1>
           </div>
           }
+          <div class="past">
+          {
+            Object.keys(pastEvents).reverse().map((year) => {
+              return (
+                <>
+                  <h1>{year}</h1>
+                  <div class="scroll"
+                    ref={ref}
+                  >
+                    <div class="spacer"
+                      onClick={() => scroll(100)}
+                    ></div>
+                    {pastEvents[year].map((event) => {
+                      return (
+                        <Event event={{
+                          name: event[0].event_name,
+                          description: event[0].event_date.toDateString(),
+                          image: fetchImage(event) || backupImageUrl,
+                          id: event[0].id,
+                        }} />
+                      );
+                    })}
+                    <div class="spacer"></div>
+                  </div>
+                </>
+              )
+            })
+          }
+          </div>
           </>}
-          {/* <div class="past">
-              <h1>Past Events</h1>
-              {
-                  !loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
-                      if (year === "Whoops") {
-                          return <></>;
-                      }
-                      return (<div class="year">
-                          <h1>{year}</h1>
-                          <SlidingCarousel
-                              items={pastEvents[year]}
-                          />
-                      </div>)
-                  }) : <></>
-              }
-          </div> */}
-          <div class="capsule">
-          <div class="container">
-
-              {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
-                  if (year === "Whoops") {
-                      // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
-                      return <></>;
-                  }
-                  return (
-                      <>
-                      <h1
-                          onClick={() => toggleShowHide(year)}
-                          style={{
-                              fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
-                          }}
-                      >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
-                      {
-                          yearsToExpand.includes(year) &&
-                          pastEvents[year].map((event) => {
-                              return (
-                                  <Event
-                                  event={{
-                                      name: event[0].event_name,
-                                      description: event[0].event_date.toDateString(),
-                                      image: fetchImage(event) || backupImageUrl,
-                                      id: event[0].id,
-                                  }}
-                                  />
-                              );
-                          })
-                      }
-                      </>
-                  );
-              }) : <div className="loader"><Loader /></div>}
-          </div>
-          </div>
       </div>
     </div>
   );

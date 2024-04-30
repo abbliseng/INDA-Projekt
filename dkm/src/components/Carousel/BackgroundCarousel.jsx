@@ -19,10 +19,12 @@ const BackgroundCarousel = ({items, page_specific = false}) => {
       return (
         <div
       class="main"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('dkm-logo-white.png')`,
-      }}
-    ></div>
+      // style={{
+      //   backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('dkm-logo-white.png')`,
+      // }}
+    >
+      <img src="/dkm-logo-white.png" alt="logo" />
+    </div>
       );
     }
 
@@ -43,10 +45,14 @@ const BackgroundCarousel = ({items, page_specific = false}) => {
   return (
     <div
       class="main"
-      style={{
-        backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('${items[index].image}')`,
-      }}
+      // style={{
+      //   backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('${items[index].image}')`,
+      // }}
     >
+      {/* Img with the current photo with linear gradient */}
+        <div class="img" style={{
+            backgroundImage: `linear-gradient(to bottom, #1e1e1e00 60%, #1e1e1eff), url('${items[index].image}')`,
+        }}></div>
         <div class="content">
             <h1>{items[index].name}</h1>
             <p>{items[index].description}</p>
