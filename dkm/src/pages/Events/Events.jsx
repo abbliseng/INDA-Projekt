@@ -58,7 +58,8 @@ const Events = () => {
 
       // Group by year
       const years = {};
-      const currentDate = new Date("2024-04-15");// new Date();
+      // const currentDate = new Date("2024-04-15");
+      const currentDate = new Date();
       currentDate.setHours(23, 59, 59, 999);
 
       // NOTE: Temporarily set current date to first of January 2024 to show all events
