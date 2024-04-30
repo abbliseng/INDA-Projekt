@@ -1,13 +1,7 @@
 .main {
-    // Shift it up 75px to account for the header
-    // margin-top: -75px;
-    min-height: calc(82vh - 75px - 40px); // 75px header, 40px footer
-    // outline: 1px solid white;
-    background-size: cover;
-    // background-position: center;
     width: 100%;
-
-    z-index: -1;
+    margin-top: -75px;
+    min-height: calc(90vh - 75px - 40px); // 75px header, 40px footer
 
     position: relative;
 
@@ -16,14 +10,24 @@
     flex-wrap: wrap;
     justify-content: end;
 
+    .img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        z-index: -1;
+        background-repeat: no-repeat;
+        background-size: cover;
+        // background-position: center;
+    }
+
     .content {
-        // padding: 100px;
         width: 100%;
         text-align: center;
     }
 
     .dots {
-        margin-top: 10px;
+        margin-top: 50px;
         width: 100%;
 
         button {
@@ -62,7 +66,6 @@
                 width: min(100%, 20px);
                 aspect-ratio: 1/1;
                 &:hover {
-                    // Make it slightly larger
                     transform: scale(1.4);
                     cursor: pointer;
                 }
