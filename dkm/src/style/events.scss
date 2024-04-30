@@ -1,11 +1,15 @@
 @import "primary.scss";
 
+.c {
+    width: 100%;
+}
+
 .page {
     display: flex;
     flex-direction: column;
     // align-items: center;
     // justify-content: center;
-    width: 100%;
+    width: min(80%, 1400px);
     min-height: calc(100vh - 75px - 40px); // 75px header, 40px footer
     color: white;
 

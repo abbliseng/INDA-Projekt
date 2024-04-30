@@ -111,76 +111,78 @@ const Events = () => {
   };
 
   return (
-    <div class="page">
-        {loadingPastEvents ? <div className="loader"><Loader /></div> : <>
-        {upcomingEvents.length > 0 ?
-            <BackgroundCarousel
-                items={upcomingEvents}
-            />
-            : <div class="no-upcoming">
-            <img src="/dkm-logo-white.png" alt="logo" />
-            <h1
-                style={{
-                    textAlign: "center",
-                    fontSize: "24px",
-                    marginBottom: "50px",
-                }}
-            > Currently there are no upcoming events, stay tuned! </h1>
-        </div>
-        }
-        </>}
-        {/* <div class="past">
-            <h1>Past Events</h1>
-            {
-                !loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
-                    if (year === "Whoops") {
-                        return <></>;
-                    }
-                    return (<div class="year">
-                        <h1>{year}</h1>
-                        <SlidingCarousel
-                            items={pastEvents[year]}
-                        />
-                    </div>)
-                }) : <></>
-            }
-        </div> */}
-        <div class="capsule">
-        <div class="container">
+    <div class="c">
+      <div class="page">
+          {loadingPastEvents ? <div className="loader"><Loader /></div> : <>
+          {upcomingEvents.length > 0 ?
+              <BackgroundCarousel
+                  items={upcomingEvents}
+              />
+              : <div class="no-upcoming">
+              <img src="/dkm-logo-white.png" alt="logo" />
+              <h1
+                  style={{
+                      textAlign: "center",
+                      fontSize: "24px",
+                      marginBottom: "50px",
+                  }}
+              > Currently there are no upcoming events, stay tuned! </h1>
+          </div>
+          }
+          </>}
+          {/* <div class="past">
+              <h1>Past Events</h1>
+              {
+                  !loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
+                      if (year === "Whoops") {
+                          return <></>;
+                      }
+                      return (<div class="year">
+                          <h1>{year}</h1>
+                          <SlidingCarousel
+                              items={pastEvents[year]}
+                          />
+                      </div>)
+                  }) : <></>
+              }
+          </div> */}
+          <div class="capsule">
+          <div class="container">
 
-            {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
-                if (year === "Whoops") {
-                    // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
-                    return <></>;
-                }
-                return (
-                    <>
-                    <h1
-                        onClick={() => toggleShowHide(year)}
-                        style={{
-                            fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
-                        }}
-                    >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
-                    {
-                        yearsToExpand.includes(year) &&
-                        pastEvents[year].map((event) => {
-                            return (
-                                <Event
-                                event={{
-                                    name: event[0].event_name,
-                                    description: event[0].event_date.toDateString(),
-                                    image: fetchImage(event) || backupImageUrl,
-                                    id: event[0].id,
-                                }}
-                                />
-                            );
-                        })
-                    }
-                    </>
-                );
-            }) : <div className="loader"><Loader /></div>}
-        </div>
-        </div>
+              {!loadingPastEvents ? Object.keys(pastEvents).reverse().map((year) => {
+                  if (year === "Whoops") {
+                      // FIXME: This is a temporary fix for when we can't parse the year correctly, noticed this happened when viewing on mobile (using safari)
+                      return <></>;
+                  }
+                  return (
+                      <>
+                      <h1
+                          onClick={() => toggleShowHide(year)}
+                          style={{
+                              fontWeight: yearsToExpand.includes(year) ? "bold" : "normal",
+                          }}
+                      >  {yearsToExpand.includes(year) ? "< " + year + " >" : year} </h1>
+                      {
+                          yearsToExpand.includes(year) &&
+                          pastEvents[year].map((event) => {
+                              return (
+                                  <Event
+                                  event={{
+                                      name: event[0].event_name,
+                                      description: event[0].event_date.toDateString(),
+                                      image: fetchImage(event) || backupImageUrl,
+                                      id: event[0].id,
+                                  }}
+                                  />
+                              );
+                          })
+                      }
+                      </>
+                  );
+              }) : <div className="loader"><Loader /></div>}
+          </div>
+          </div>
+      </div>
     </div>
   );
 };
