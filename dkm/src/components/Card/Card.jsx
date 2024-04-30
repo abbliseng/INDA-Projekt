@@ -29,7 +29,11 @@ return (
             <p class="desc">{description}</p>
         </div> */}
         </div>
-        <h2>{title}</h2>
+        <h2>{
+            // Show just the first 20 characters
+            title.length > 50 ? title.substring(0, 50) + "..." : title
+            
+            }</h2>
         <h3>{description}</h3>
     </div>
   );

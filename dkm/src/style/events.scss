@@ -36,21 +36,17 @@
             width: 100%;
         }
         .scroll {
-            // max-height: 250px;
+            height: 250px;
             display: flex;
             flex-direction: row;
             overflow-x: auto;
+            overflow-y: hidden;
 
             .spacer {
                 min-width: 50px;
                 width: 50px;
                 max-width: 50px;
             }
-
-            overflow: scroll;
-            // scrollbar-color: $secondary_dark $primary;
-            // scrollbar-width: thin;
-            // No scrollbar for now
             scrollbar-width: none;
         }
     }
