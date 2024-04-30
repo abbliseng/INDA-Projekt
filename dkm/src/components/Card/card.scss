@@ -1,5 +1,20 @@
 @import '../../style/primary.scss';
 
+
+h2 {
+    font-size: 1.2em;
+    font-weight: 600;
+    color: $secondary_dark_ish;
+    padding-right: 5px;
+}
+
+h3 {
+    font-size: 1.0em;
+    font-weight: 500;
+    color: $secondary_dark;
+    padding-right: 5px;
+}
+
 .card {
     cursor: pointer;
 

@@ -5,29 +5,32 @@ const Card = ({ title, description, picture = "https://via.placeholder.com/150",
     const [hover, setHover] = useState(false);
 
 return (
-    <div class={`card ${fullsize ? "fullsize" : ""}`}
-        style={{
-            backgroundImage: `url(${picture})`,
-        }}
-        onClick={() => {
-            if (id != 1) {
-                window.open("https://www.facebook.com/events/" + id);
-            } else {
-                window.open("http://localhost:3000/stella");
-            }
-        }}
-    >
-        {/* <div class="content"
-            onMouseEnter={(e)=>{
-                setHover(true);
+    <div>
+        <div class={`card ${fullsize ? "fullsize" : ""}`}
+            style={{
+                backgroundImage: `url(${picture})`,
             }}
-            onMouseLeave={(e)=>{
-                setHover(false);
+            onClick={() => {
+                if (id != 1) {
+                    window.open("https://www.facebook.com/events/" + id);
+                } else {
+                    window.open("http://localhost:3000/stella");
+                }
             }}
         >
-            <h2>{title}</h2>
+            {/* <div class="content"
+                onMouseEnter={(e)=>{
+                    setHover(true);
+                }}
+                onMouseLeave={(e)=>{
+                    setHover(false);
+                }}
+            >
             <p class="desc">{description}</p>
         </div> */}
+        </div>
+        <h2>{title}</h2>
+        <h3>{description}</h3>
     </div>
   );
 };
