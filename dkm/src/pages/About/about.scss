@@ -65,13 +65,14 @@
             flex-wrap: wrap;
             justify-content: center;
             .member {
-                width: 200px;
+                // width: 200px;
                 display: flex;
                 flex-direction: column;
                 align-items: center;
-                margin: 1rem;
+                flex-grow: 1;
+                width: max(12.5%, 100px);
                 img {
-                    width: 100%;
+                    width: 90%;
                     aspect-ratio: 1/1;
                     border-radius: 50%;
                     object-fit: cover;
