@@ -8,10 +8,10 @@ const Header = ()=>{
         return (
             <div className={classname}>
                 <ul>
-                    <li>
+                    {/* <li>
                         <a href="/">Home</a>
-                    </li>
-                    <div />
+                    </li> */}
+                    {/* <div /> */}
                     <li>
                         <a href="/events">Events</a>
                     </li>

@@ -1,0 +1,82 @@
+[
+    {
+        "id": 1,
+        "name": "Tom Rhenström",
+        "role": "Klubbmästare"
+    },
+    {
+        "id": 2,
+        "name": "Olle Jernström",
+        "role": "Vice klubbmästare"
+    },
+    {
+        "id": 3,
+        "name": "Tilde Tärnvik",
+        "role": "Ekonomimästare"
+    },
+    {
+        "id": 4,
+        "name": "Isabella Allgén Takami",
+        "role": "Barmästare"
+    },
+    {
+        "id": 5,
+        "name": "William Krull",
+        "role": "Barmästare"
+    },
+    {
+        "id": 6,
+        "name": "Love Belin",
+        "role": "Festmästare"
+    },
+    {
+        "id": 7,
+        "name": "Yusuf Mohamed",
+        "role": "Infomästare"
+    },
+    {
+        "id": 8,
+        "name": "Lovisa Sjöberg",
+        "role": "Infomästare"
+    },
+    {
+        "id": 9,
+        "name": "Fabian Öst",
+        "role": "VodkaKnatte"
+    },
+    {
+        "id": 10,
+        "name": "Marcus Bardvall",
+        "role": "MåsKnatte"
+    },
+    {
+        "id": 11,
+        "name": "Elin Johnsson",
+        "role": "GrishKnatte"
+    },
+    {
+        "id": 12,
+        "name": "Albin Törnqvist",
+        "role": "KnuspKnatte"
+    },
+    {
+        "id": 13,
+        "name": "Lisa Engström",
+        "role": "AgentKnatte"
+    },
+    {
+        "id": 14,
+        "name": "Olga Wollbo",
+        "role": "ArmbrytarKnatte"
+    },
+    {
+        "id": 15,
+        "name": "Teodor Denell",
+        "role": "BjörnKnatte"
+    },
+    {
+        "id": 16,
+        "name": "Nedea Haukebö",
+        "role": "ÄggKnatte"
+    }
+]

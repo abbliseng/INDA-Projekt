@@ -20,7 +20,7 @@ import About from './pages/About/About';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
 const BrowserRouter = createBrowserRouter([
-  { path: "/", element: <Main /> },
+  { path: "/", element: <Events /> },
   { path: "/events", element: <Events /> },
   { path: "/slay", element: <Slay /> },
   // { path: "/stella", element: <Slay /> },

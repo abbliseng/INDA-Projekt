@@ -20,7 +20,7 @@ const Events = () => {
   const backupImageUrl = "/logo.png";
   const [upcomingEvents, setUpcomingEvents] = useState([]);
 
-  const url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events";
+  const url = "https://fk63b9q0l6.execute-api.eu-west-2.amazonaws.com/events"; // NOTE: API URL for all events
   const [pastEvents, setPastEvents] = useState([]);
   const [loadingPastEvents, setLoadingPastEvents] = useState(true);
 
@@ -37,7 +37,7 @@ const Events = () => {
     setUpcomingEvents(upcoming);
   }, [pastEvents]);
 
-  // Fetch with GET
+  // NOTE: Fetch data from API, in this case events
   const fetchData = async () => {
     setLoadingPastEvents(true);
     try {
@@ -58,18 +58,13 @@ const Events = () => {
 
       // Group by year
       const years = {};
-      // const currentDate = new Date("2024-04-15");
       const currentDate = new Date();
       currentDate.setHours(23, 59, 59, 999);
-
-      // NOTE: Temporarily set current date to first of January 2024 to show all events
-      // currentDate = new Date("2024-01-01");
-
       const upcomingEvents = [];
       
       data.forEach(event => {
         const eventDate = event[0].event_date;
-        if (eventDate >= currentDate) { // FIXME: Events that occur later the same day are not shown
+        if (eventDate >= currentDate) {
           upcomingEvents.push(event);
         } else {
           const year = eventDate.getFullYear();
