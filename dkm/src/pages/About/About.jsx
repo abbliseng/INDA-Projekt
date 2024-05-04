@@ -49,12 +49,6 @@ const About = () => {
     return (
         <div class="c">
             <div class="d">
-                <img src="https://dkmstorage.s3.eu-north-1.amazonaws.com/group_pictures/2334.jpg" alt="" />
-                <h1>Vilka är DKM?</h1>
-                <p>
-                DKM är Datas Klubbmästeri. Det är vi som ser till att ni dataloger har möjlighet att ha roligt under er tid här på teknis. Vi anordnar fester och pubar under hela året (förutom under mottagningen). Vill du komma i kontakt med oss, släng iväg ett mail till dkm@datasektionen.se!
-                </p>
-                <div class="break"></div>
                 <h1>Vad gör DKM?</h1>
                 <div class="break"></div>
                 <h2>Pubar</h2>
@@ -65,15 +59,6 @@ const About = () => {
                     <br/><br/>
                     Du som söker DKM behöver inte ha någon erfarenhet av att stå i bar tidigare. Under ditt första år kommer du som knatte få lära dig allt som behövs av oss mästare. Det viktigaste är att vi har kul tillsammans!
                 </p>
-                {/* <div class="images">
-                    {
-                        images.work.map((image, index) => {
-                            return (
-                                <img src={image} alt="jobb" key={index} />
-                            );
-                        })
-                    }
-                </div> */}
                 <div class="break"></div>
                 <h2>Sittningar</h2>
                 <p>
@@ -94,8 +79,22 @@ const About = () => {
                     Utöver allt roligt som vi gör med sektionen har vi även samarbeten med andra sektioners klubbmästerier! Detta är ett perfekt sett att lära känna fler människor på KTH.
                     Vi har framförallt mycket sammarbeten med MKM och CLW där vi bland annat anordnar en gemensam gasque varje år! Utöver det har vi föera interna event med dessa klubbmästerier.
                 </p>
+                {/* <div class="break"></div> */}
+                <h1
+                    style={{
+                        "marginTop": "75px", // FIXME: Shouldn't be inline, put in css file instead.
+                    }}
+                >Vilka är DKM?</h1>
                 <div class="break"></div>
-                <h2>Medlemmar 23/34</h2>
+                <p>
+                DKM är Datas Klubbmästeri. Det är vi som ser till att ni dataloger har möjlighet att ha roligt under er tid här på teknis. Vi anordnar fester och pubar under hela året (förutom under mottagningen). Vill du komma i kontakt med oss, släng iväg ett mail till dkm@datasektionen.se!
+                </p>
+                <div class="break"></div>
+                <h2
+                    style={{
+                        "marginBottom": "15px", // FIXME: Shouldn't be inline, put in css file instead.
+                    }}
+                >Medlemmar 23/34</h2>
                 <div class="members">
                     {
                         members.map((member, index) => {
@@ -109,6 +108,8 @@ const About = () => {
                         })
                     }
                 </div>
+                <div class="break"></div>
+                <img src="https://dkmstorage.s3.eu-north-1.amazonaws.com/group_pictures/2334.jpg" alt="" />
                 <div class="break"></div>
                 <h2>Bild galleri</h2>
             </div>
