@@ -1,5 +1,5 @@
 # INDA-Projekt
-Fix da DMK hemsida -> [dkm.io](dkm.io)
+Fix da DMK hemsida -> [dkm.io](https://www.dkm.io)
 
 - [INDA-Projekt](#inda-projekt)
   - [START](#start)
