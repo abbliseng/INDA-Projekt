@@ -7,10 +7,10 @@ Fix da DMK hemsida
     - [DB](#db)
     - [Webscraper](#webscraper)
   - [Repo structure](#repo-structure)
-    - [\< dkm \>](#-dkm-)
-    - [\< server \>](#-server-)
-    - [\< aws \>](#-aws-)
-    - [\< fb-webscraper \>](#-fb-webscraper-)
+    - [dkm](#dkm)
+    - [server](#server)
+    - [aws](#aws)
+    - [fb-webscraper](#fb-webscraper)
   - [Project Specification](#project-specification)
     - [Links](#links)
       - [Dependencies](#dependencies)
@@ -49,10 +49,16 @@ Then just run `node ./fb-webscraper/scrape.js` from the repo.
 
 ## Repo structure
 The repository is grouped into four larger subfolders.
-### < [dkm]() >
-### < [server]() >
-### < [aws]() >
-### < [fb-webscraper]() >
+### [dkm](https://github.com/abbliseng/INDA-Projekt/tree/main/dkm)
+Contains the whole react app (frontend of the application). Most noteble files are within the `/src` subfolder, which contains the source code.  
+`/components` house all the reoccuringly used components. Such as a carousel for displaying events or the visual loader that is shown before data has been fetched.  
+`/pages` as the name suggests contain each frontend page. The only two currently in use are `events` and `about`. Though you might still be able to visit some of the others ;^)  
+`/style` contains the styling files for the larger webpages that share some styling. Components styling is located in the aforementioned `/components` folder.
+### [server](https://github.com/abbliseng/INDA-Projekt/tree/main/server)
+### [aws](https://github.com/abbliseng/INDA-Projekt/tree/main/aws)
+This subfolder contians some of the aws functions source codes.
+### [fb-webscraper](https://github.com/abbliseng/INDA-Projekt/tree/main/fb-webscraper)
+The server folder only contains one final script (it's been a mess). `scrape.js` scrapes DKMs upcoming events page and pushes these to the aws http endpoint. The reason this is currently not hosted at our own server is because the infrastructure for aws already existed so we simply had to create the lamda, api and dynamodb backend for it. It's also quite useful since we can use s3 for image storage and not have to worry about that.
 
 
 ## Project Specification
