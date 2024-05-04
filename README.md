@@ -2,32 +2,57 @@
 Fix da DMK hemsida
 
 - [INDA-Projekt](#inda-projekt)
-  * [Run](#run)
-    + [START DB](#start-db)
-  * [Repo structure](#repo-structure)
-  * [Project Specification](#project-specification)
-    + [Links](#links)
+  - [START](#start)
+    - [Webapp](#webapp)
+    - [DB](#db)
+    - [Webscraper](#webscraper)
+  - [Repo structure](#repo-structure)
+    - [\< dkm \>](#-dkm-)
+    - [\< server \>](#-server-)
+    - [\< aws \>](#-aws-)
+    - [\< fb-webscraper \>](#-fb-webscraper-)
+  - [Project Specification](#project-specification)
+    - [Links](#links)
       - [Dependencies](#dependencies)
-    + [Naming conventions](#naming-conventions)
+    - [Naming conventions](#naming-conventions)
       - [Issues and Commits](#issues-and-commits)
       - [PRs](#prs)
-    + [Project Description](#project-description)
-    + [MVP Requirements](#mvp-requirements)
+    - [Project Description](#project-description)
+    - [MVP Requirements](#mvp-requirements)
+    - [Who does what?](#who-does-what)
 
-## Run
 
-### START DB
+## START
+### Webapp
+To host the webpage locally *for the first time* just run the following commands in order:  
+1. `cd dkm`
+2. `npm install`
+3. `npm run start`    
+  
+Once the inital setup is done you just need to run the third command to boot up the localhost.
+
+### DB
 - Create a `.env` file
 - Add parameter, eg: `POSTGRES_CONNECTION=postgres://dkm:dkm@localhost:5432/dkm`
 - Change the values in the `database.sh` file
 - Start the database by runnning `database.sh`
 - You may need to add sudo permissions etc to the `.sh` file
 
-https://www.canva.com/design/DAGAOIe0X-w/Dq1IdkRHaqR6XdAoQafNTw/edit?utm_content=DAGAOIe0X-w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
-
-DKM go brrrrrrrrrrrrrrrrrrrrrrrrrrr
+### Webscraper
+To run the webscraper first make sure to have a aws credentials file with the `infom` profile. It should look something along the lines of: 
+```
+[infom]
+aws_access_key_id = YOUR_ACCESS_KEY
+aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
+```  
+Then just run `node ./fb-webscraper/scrape.js` from the repo.
 
 ## Repo structure
+The repository is grouped into four larger subfolders.
+### < [dkm]() >
+### < [server]() >
+### < [aws]() >
+### < [fb-webscraper]() >
 
 
 ## Project Specification
