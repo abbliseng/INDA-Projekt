@@ -36,6 +36,8 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/pelletier/go-toml/v2 v2.0.8 // indirect
+	github.com/rs/cors v1.11.0 // indirect
+	github.com/rs/cors/wrapper/gin v0.0.0-20240429123903-3d336ea9b505 // indirect
 	github.com/saintfish/chardet v0.0.0-20120816061221-3af4cd4741ca // indirect
 	github.com/temoto/robotstxt v1.1.1 // indirect
 	github.com/twitchyliquid64/golang-asm v0.15.1 // indirect

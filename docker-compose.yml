@@ -22,8 +22,10 @@ services:
       context: .
       dockerfile: ./server/dockerfile
     ports:
-      - "3001:3001"
+      - "5001:5001"
     env_file: .env
+    environment:
+      - POSTGRES_CONNECTION=postgres://dkm:dkm@db:5432/dkm
     depends_on:
       db:
         condition: service_healthy
@@ -32,5 +34,7 @@ services:
     build:
       context: ./dkm
       dockerfile: dockerfile
+    environment:
+      - REACT_APP_API_URL=backend:5001
     ports:
       - "3000:3000"

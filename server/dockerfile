@@ -13,6 +13,6 @@ RUN go build -o main .
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /go/src/app/main .
-COPY --from=builder /go/src/app/.env .
+# COPY --from=builder /go/src/app/.env .
 
 CMD ["./main"]

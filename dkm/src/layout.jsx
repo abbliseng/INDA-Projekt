@@ -19,6 +19,10 @@ const Header = ()=>{
                     <li>
                         <a href="/about">About us</a>
                     </li>
+                    <div />
+                    <li>
+                        <a href="/drinks">Drinks</a>
+                    </li>
                 </ul>
             </div>
         )

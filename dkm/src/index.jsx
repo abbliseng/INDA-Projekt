@@ -15,6 +15,7 @@ import Events from './pages/Events/Events';
 import Slay from './pages/Slay/Slay';
 import Worm from './pages/Worm/Worm';
 import About from './pages/About/About';
+import Drinks from './pages/Drinks/Drinks';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -26,6 +27,7 @@ const BrowserRouter = createBrowserRouter([
   // { path: "/stella", element: <Slay /> },
   { path: "/worm", element: <Worm /> },
   { path: "/about", element: <About /> },
+  { path: "/drinks", element: <Drinks /> },
 ]);
 
 root.render(
