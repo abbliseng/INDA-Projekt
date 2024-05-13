@@ -4,12 +4,12 @@ WORKDIR /go/src/app
 
 COPY . .
 
+# get go stuff
 RUN go get github.com/mattn/go-isatty@v0.0.19
 
-# Build the Go app
 RUN go build -o main .
 
-# Final stage
+# copy over env and run go app
 FROM alpine:latest
 WORKDIR /app
 COPY --from=builder /go/src/app/main .
