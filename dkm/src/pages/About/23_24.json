@@ -1,0 +1,98 @@
+[
+    {
+        "id": 1,
+        "name": "Tom Rhenström",
+        "role": "Klubbmästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/tom.jpeg"
+    },
+    {
+        "id": 2,
+        "name": "Olle Jernström",
+        "role": "Vice klubbmästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/olle.jpeg"
+    },
+    {
+        "id": 3,
+        "name": "Tilde Tärnvik",
+        "role": "Ekonomimästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/tilde.jpeg"
+    },
+    {
+        "id": 4,
+        "name": "Isabella Allgén Takami",
+        "role": "Barmästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/isabella.jpeg"
+    },
+    {
+        "id": 5,
+        "name": "William Krull",
+        "role": "Barmästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/william.jpeg"
+    },
+    {
+        "id": 6,
+        "name": "Love Belin",
+        "role": "Festmästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/love.jpeg"
+    },
+    {
+        "id": 7,
+        "name": "Yusuf Mohamed",
+        "role": "Infomästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/yusuf.jpeg"
+    },
+    {
+        "id": 8,
+        "name": "Lovisa Sjöberg",
+        "role": "Infomästare",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/lovisa.png"
+    },
+    {
+        "id": 9,
+        "name": "Fabian Öst",
+        "role": "VodkaKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/fabian.png"
+    },
+    {
+        "id": 10,
+        "name": "Marcus Bardvall",
+        "role": "MåsKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/marcus.jpeg"
+    },
+    {
+        "id": 11,
+        "name": "Elin Johnsson",
+        "role": "GrishKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/elin.jpeg"
+    },
+    {
+        "id": 12,
+        "name": "Albin Törnqvist",
+        "role": "KnuspKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/albin.jpeg"
+    },
+    {
+        "id": 13,
+        "name": "Lisa Engström",
+        "role": "AgentKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/lisa.jpeg"
+    },
+    {
+        "id": 14,
+        "name": "Olga Wollbo",
+        "role": "ArmbrytarKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/olga.jpeg"
+    },
+    {
+        "id": 15,
+        "name": "Teodor Denell",
+        "role": "BjörnKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/teodor.jpg"
+    },
+    {
+        "id": 16,
+        "name": "Nedea Haukebö",
+        "role": "ÄggKnatte",
+        "img": "https://dkmstorage.s3.eu-north-1.amazonaws.com/23_24/individual_imgs/nedea.jpeg"
+    }
+]

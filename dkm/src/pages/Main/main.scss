@@ -1,0 +1,74 @@
+// Import
+@import '../../style/primary.scss';
+
+.con {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+
+  .buttons {
+    position:absolute;
+
+    flex-basis: 100%;
+    width: 100%;
+    display: flex;
+    // justify-content: space-around;
+    justify-content: center;
+    align-items: center;
+    // flex-wrap: wrap;
+    flex-direction: column;
+    // NOTE: Copied from https://getcssscan.com/css-buttons-examples
+    // Padding between items
+    gap: 10px;
+
+    img{
+        max-width: min(100%, 300px);
+    }
+
+    button {
+      appearance: none;
+      background-color: #1e1e1eee;
+      border: 2px solid #1e1e1eee;
+      border-radius: 15px;
+      box-sizing: border-box;
+      color: $secondary;
+      cursor: pointer;
+      display: inline-block;
+      font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+        "Segoe UI Symbol";
+      font-size: 16px;
+      font-weight: 600;
+      line-height: normal;
+      margin: 0;
+      min-height: 60px;
+      min-width: 0;
+      outline: none;
+      padding: 16px 24px;
+      text-align: center;
+      text-decoration: none;
+      transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: manipulation;
+      min-width: 250px;
+      will-change: transform;
+    }
+    button:disabled {
+        pointer-events: none;
+    }
+    button:hover {
+        color: #fff;
+        background-color: #1A1A1A;
+        box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+        transform: translateY(-2px);
+    }
+    button:active {
+        box-shadow: none;
+        transform: translateY(0);
+    }
+  }
+}

@@ -1,77 +1,60 @@
 @import "primary.scss";
 
+.c {
+    width: 100%;
+}
+
 .page {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     width: 100%;
-    height: 100%;
+    min-height: calc(90vh - 75px - 40px); // 75px header, 40px footer
     color: white;
-}
-
-.capsule {
-    // margin-top: 35px;
-    margin-bottom: 35px;
-
-    width: min(95%, 1000px);
-    display: flex;
-    // justify-content: center;
-    align-items: center;
-    flex-direction: column;
-
-    .carousel_section {
-        width: 100%;
-        // min-width: 1000px;
-        aspect-ratio: 16/9;
-        margin-bottom: 35px;
-    }
-
-    img{
-        max-width: min(90%, 1000px);
-        aspect-ratio: 1/1;
-        object-fit: cover;
-    }
-
-    h1 {
-        min-width: 100px;
-        padding-left: 5px;
-        padding-right: 5px;
-        font-size: 1.5em;
-    }
-}
-
-.container {
-    // background-color: white;
-    width: 100%;
-    display: flex;
-    flex-wrap: wrap;
-    text-align: center;
 
     .loader {
         padding-top: 15px;
         width: 100%;
+        height: 80vh;
 
         display: flex;
         justify-content: center;
+        align-items: center;
     }
 
-    h1{
-        color: white;
+    .past {
         width: 100%;
-        text-align: center;
-        padding-top: 5px;
-        padding-bottom: 5px;
-        border-radius: 5px;
+        display: flex;
+        flex-direction: column;
+        margin-top: 45px;
 
-        font-size: 1.25em;
+        
+        h1 {
+            margin-top: 50px;
+            padding-left: 50px;
+            font-size: 1.5rem;
+            font-weight: 600;
+            width: 100%;
+        }
+        .scroll {
+            height: 250px;
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
 
-        transition: background-color 0.3s;
-
-        &:hover {
-            background-color: $secondary_dark;
-            cursor: pointer;
+            .spacer {
+                min-width: 50px;
+                width: 50px;
+                max-width: 50px;
+            }
+            scrollbar-width: none;
         }
     }
 }
 
+.no-upcoming {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
