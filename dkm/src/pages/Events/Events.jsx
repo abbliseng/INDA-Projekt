@@ -53,13 +53,16 @@ const Events = () => {
       // Parse date, sort by date
       data.forEach(event => {
         event[0].event_date = new Date(event[0].event_date);
+        // Set the hour for the event to 23:59:59:999
+        event[0].event_date.setHours(23, 59, 59, 999);
       });
       data.sort((a, b) => a[0].event_date - b[0].event_date);
 
       // Group by year
       const years = {};
       const currentDate = new Date();
-      currentDate.setHours(23, 59, 59, 999);
+      currentDate.setHours(0, 0, 0, 0);
+      console.log(currentDate);
       const upcomingEvents = [];
       
       data.forEach(event => {
