@@ -67,7 +67,7 @@ The server folder only contains one final script (it's been a mess). `scrape.js`
 
 ## Project Specification
 ### Links
-* [Trello](https://trello.com/b/GDtDiiEx/inda-projekt)
+* [Trello](https://trello.com/b/x2A65hpf/inda-projekt)
 * [Canva](https://www.canva.com/design/DAGAOIe0X-w/Dq1IdkRHaqR6XdAoQafNTw/edit?utm_content=DAGAOIe0X-w&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 #### Dependencies
 * [Goquery](github.com/PuerkitoBio/goquery)
