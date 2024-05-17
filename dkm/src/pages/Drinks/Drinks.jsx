@@ -6,10 +6,12 @@ const Drinks = () => {
     const [drinksData, setDrinksData] = useState(null);
 
     useEffect(() => {
+        console.log("Fetching drinks data");
         fetch(process.env.REACT_APP_API_URL + "/api/drinks")
         .then(response => response.json())
         .then(data => {
-            setDrinksData(data);
+            console.log("DATA: ", data)
+            setDrinksData(data.data);
         });
     }
     , []);

@@ -12,7 +12,7 @@ services:
     volumes:
       - ./database/:/docker-entrypoint-initdb.d/
     healthcheck:
-      test: ["CMD", "pg_isready", "-U", "postgres"]
+      test: ["CMD", "pg_isready", "-U", "dkm"]
       interval: 3s
       timeout: 3s
       retries: 5
@@ -35,6 +35,6 @@ services:
       context: ./dkm
       dockerfile: dockerfile
     environment:
-      - REACT_APP_API_URL=backend:5001
+      - REACT_APP_API_URL=http://127.0.0.1:5001
     ports:
       - "3000:3000"
