@@ -38,6 +38,10 @@ Once the inital setup is done you just need to run the third command to boot up 
 - Start the database by runnning `database.sh`
 - You may need to add sudo permissions etc to the `.sh` file
 
+### ALternative - docker-compose
+- start the docker-compose file with `docker-compose up`
+- No need for `.env` 
+
 ### Webscraper
 To run the webscraper first make sure to have a aws credentials file with the `infom` profile. It should look something along the lines of: 
 ```
